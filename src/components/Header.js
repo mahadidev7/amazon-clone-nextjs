@@ -45,7 +45,21 @@ const Header = () => {
             </div>
         </div>
         {/* // bottom nav  */}
-        <div></div>
+        <div className='flex items-center space-x-2 p-2 pl-6 text-sm text-white' style={{background: "#232F3E", overflow:"auto"}}>
+            <p className='link flex items-center whitespace-nowrap'>
+                <AiOutlineMenu size={25}/>
+                All
+            </p>
+            <p className='link whitespace-nowrap'>Prime Video</p>
+            <p className='link whitespace-nowrap'>Amazon Business</p>
+            <p className='link whitespace-nowrap'>Today's Deals</p>
+            <p className='link whitespace-nowrap'>Electronics</p>
+            <p className='link whitespace-nowrap'>Food & Grocery</p>
+            <p className='link whitespace-nowrap'>Prime</p>
+            <p className='link whitespace-nowrap'>Buy Again</p>
+            <p className='link whitespace-nowrap'>Shopper Toolkit</p>
+            <p className='link whitespace-nowrap'>Health  & Personal Care</p>
+        </div>
     </header>
   )
 }
