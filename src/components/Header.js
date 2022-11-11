@@ -6,7 +6,7 @@ import { BsSearch } from 'react-icons/bs';
 
 const Header = () => {
   return (
-    <header>
+    <header id='home'>
         {/* // top mav  */}
         <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2 '>
             {/* logo */}
@@ -21,9 +21,13 @@ const Header = () => {
             </div>
 
             {/* Search  */}
-            <div className='hidden sm:flex items-center h-10 cursor-pointer bg-yellow-400 hover:bg-yellow-500 rounded-md flex-grow'>
-                <input type="text" className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' />
-                <BsSearch className="h-12 p-4 text-bold" color='#000' size={60} />
+            <div className='hidden sm:flex items-center h-10 cursor-pointer  rounded-md flex-grow overflow-hidden'>
+                <div className='bg-white border flex justify-center items-center px-3 gap-1'>
+                    <AiOutlineMenu className="h-12 text-bold " color='#000' size={16} />
+                    <p>All</p>
+                </div>
+                <input type="text" className='p-2 h-full w-6 flex-grow flex-shrink  focus:outline-none px-4' placeholder='Search....' />
+                <BsSearch className="h-12 p-4 text-bold bg-yellow-400 hover:bg-yellow-500" color='#000' size={60} />
             </div>
 
             {/* Right */}
@@ -45,11 +49,11 @@ const Header = () => {
             </div>
         </div>
         {/* // bottom nav  */}
-        <div className='flex items-center space-x-2 p-2 pl-6 text-sm text-white' style={{background: "#232F3E", overflow:"auto"}}>
-            <p className='link flex items-center whitespace-nowrap'>
+        <div className='flex items-center space-x-2 p-2 py-3 pl-6 text-sm text-white' style={{background: "#232F3E", overflow:"auto"}}>
+            {/* <p className='link flex items-center whitespace-nowrap'>
                 <AiOutlineMenu size={25}/>
                 All
-            </p>
+            </p> */}
             <p className='link whitespace-nowrap'>Prime Video</p>
             <p className='link whitespace-nowrap'>Amazon Business</p>
             <p className='link whitespace-nowrap'>Today's Deals</p>

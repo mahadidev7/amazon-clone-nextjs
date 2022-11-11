@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useState } from "react";
+import BackToTop from "../components/BackToTop";
 import Banner from "../components/Banner";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
 
@@ -24,8 +26,11 @@ export default function Home({products}) {
         <ProductFeed products={allProducts} />
     </main>
 
-
-
+    <footer>
+      <BackToTop />
+      <Footer />
+    </footer>
+    
     </div>
   );
 }
