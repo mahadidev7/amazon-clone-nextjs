@@ -13,16 +13,15 @@ function Banner() {
             showIndicators={false}
             showThumbs={false}
             interval={5000}
-        
         >
             <div> 
                 <img loading='lazy' src='https://links.papareact.com/gi1' alt='banner one' />
             </div>
             <div> 
-                <img loading='lazy' src='https://links.papareact.com/6ff' alt='banner one' />
+                <img loading='lazy' src='https://links.papareact.com/6ff' alt='banner two' />
             </div>
             <div> 
-                <img loading='lazy' src='https://links.papareact.com/7ma' alt='banner one' />
+                <img loading='lazy' src='https://links.papareact.com/7ma' alt='banner three' />
             </div>
             <div> 
                 <img loading='lazy' src='https://m.media-amazon.com/images/I/71tIrZqybrL._SX3000_.jpg' alt='banner one' />

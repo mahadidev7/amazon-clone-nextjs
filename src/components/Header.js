@@ -2,11 +2,15 @@ import React from 'react';
 import Image from "next/image";
 import { AiOutlineMenu, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { selectCarts } from '../slices/basketSlice';
 
 
 const Header = () => {
+    const carts = useSelector(selectCarts)
+
   return (
-    <header id='home'>
+    <header id='top'>
         {/* // top mav  */}
         <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2 '>
             {/* logo */}
@@ -42,7 +46,7 @@ const Header = () => {
                     <p className='font-extrabold md:text-sm'>& Orders</p>
                 </div>
                 <div className='relative link flex items-center'>
-                    <span className='absolute top-0 right-10 h-5 w-5 bg-yellow-400 flex items-center justify-center rounded-full text-black font-bold'>10</span>
+                    <span className='absolute top-0 right-10 h-5 w-5 bg-yellow-400 flex items-center justify-center rounded-full text-black font-bold'>{carts.length}</span>
                     <AiOutlineShoppingCart size={30} />
                     <p className='hidden md:inline font-extrabold md:text-sm mt-4'>Basket</p> 
                 </div>

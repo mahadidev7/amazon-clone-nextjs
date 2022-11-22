@@ -1,42 +1,60 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import BackToTop from "../components/BackToTop";
 import Banner from "../components/Banner";
+import CustomModel from "../components/CustomModel";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
+import { addToBasket, selectProducts } from "../slices/basketSlice";
+import { selectServer } from "../slices/mahadiSlice";
+import useAlertModelHook from "../useHook/useAlertModelHook";
 
 export default function Home({products}) {
-  const [allProducts, setAllProducts] = useState(products);
+  const dispatch = useDispatch()
+  const {isAlert} = useAlertModelHook()
+  const sliceServer = useSelector(selectServer)
 
+  useEffect(() => {
+    dispatch(addToBasket(products))
+  }, []);
+  
   return (
-    <div className="bg-gray-100">
-    <Head>
-      <title>Amazon 2.0</title>
-    </Head>
+    <div className="bg-gray-100 relative">
+      <Head>
+        <title>Amazon 2.0</title>
+      </Head>
 
-    {/* Header  */}
-    <Header />
+    {/* Header start */}
+      <Header />
+    {/* Header end */}
 
-    <main className="max-w-screen-2xl mx-auto">
-        {/* Banner  */}
-        <Banner />
+    {/* main start */}
+      <main className="max-w-screen-2xl mx-auto">
+          {/* Banner  */}
+          <Banner />
+          {/* ProductFeed  */}
+          <ProductFeed />
+      </main>
+    {/* main end */}
 
-        {/* ProductFeed  */}
-        <ProductFeed products={allProducts} />
-    </main>
+    {/* footer start  */}
+      <footer>
+        <BackToTop />
+        <Footer />
+      </footer>
+    {/* footer end  */}
 
-    <footer>
-      <BackToTop />
-      <Footer />
-    </footer>
-    
+    {/* alert Model area start */}
+      { sliceServer === 0 ? '' : <CustomModel /> }
+    {/* alert Model area end */}
     </div>
   );
 }
 
 export async function getServerSideProps(context){
-  const products = await fetch("https://fakestoreapi.com/products").then(
+  const products = await fetch("https://course-api.com/react-store-products").then(
     (res)=> res.json()
   );
 
