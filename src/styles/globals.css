@@ -19,7 +19,6 @@ html {
     position: fixed;
     bottom: 5px;
     left: 5px;
-    z-index: 99999999999999999999999999 !important;
     padding: 15px;
     max-width: 250px;
     min-width: 250px;
@@ -33,4 +32,12 @@ html {
     align-items: center;
     justify-content: space-between;
     gap: 35px;
+}
+.informationModel{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.733);
+    width: 100vw;
+    height: 100vh;
 }

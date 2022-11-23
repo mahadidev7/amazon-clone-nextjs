@@ -13,6 +13,7 @@ function Banner() {
             showIndicators={false}
             showThumbs={false}
             interval={5000}
+            verticalSwipe="natural"
         >
             <div> 
                 <img loading='lazy' src='https://links.papareact.com/gi1' alt='banner one' />

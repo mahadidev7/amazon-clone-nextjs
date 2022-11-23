@@ -11,7 +11,7 @@ function CustomModel() {
   const {handelMessage} = useAlertModelHook()
 
   return (
-    <div className={`${ sliceServer === 200 ? 'bg-green-400' : 'bg-red-400' } modelStyle`}>
+    <div className={`${ sliceServer === 200 ? 'bg-green-400' : 'bg-red-400' } modelStyle z-20`}>
       <p className="text-black">{ `${textMessage}` }</p>
       <FaTimes size={16} color="#000" className='cursor-pointer' onClick={()=> handelMessage({server: 0, message:""})} />
     </div>
