@@ -5,7 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCarts, selectCarts } from "../slices/basketSlice";
 import useAlertModelHook from "../useHook/useAlertModelHook";
-import { FaTimes } from 'react-icons/fa';
+import ModelProduct from "./ModelProduct";
 const MAX_RATING = 5;
 const MIN_RATING = 1;
 
@@ -20,6 +20,7 @@ function ProductItem({
   company,
 }) {
   const [ismodel, setIsmodel] = useState(false);
+  const [state, setstate] = useState(1);
   const dispatch = useDispatch();
   const carts = useSelector(selectCarts);
   const { handelMessage } = useAlertModelHook();
@@ -28,7 +29,7 @@ function ProductItem({
   const [rating] = useState(
     Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
   );
-  const ratingCounter =  Math.floor(Math.random() * 200) 
+
 // hasPrime image function
   const [hasPrime] = useState(Math.random() < 0.5);
 // cart function
@@ -92,106 +93,8 @@ function ProductItem({
       </div>
 
       {/* MODEL  */}
-      {ismodel && (
-        <div className="informationModel z-20 flex items-center justify-center" >
-          <div className=" w-5/6 h-5/6 bg-white mx-auto p-4 overflow-y-auto rounded-md">
-            <div className="flex">
-              <div className="w-2/5 h-3/4 border rounede-lg ">
-                <div className="w-full h-5/6 flex items-center justify-center">
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-[100%] h-[500px] object-contain p-1 rounded-md"
-                  />
-                </div>
-                <div className="flex gap-2 py-2 px-2 w-full h-1/6 border">
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 h-14 border-2 border-black object-fill rounded cursor-pointer"
-                  />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
-                </div>
-              </div>
-              <div className="w-3/5 ml-3 relative flex items-center flex-col">
-              <FaTimes className="absolute top-0 right-0 text-2xl border cursor-pointer" onClick={()=>Ismodelhandeler()}/>
-{/* name, rating , price */}
-                <h4 className="my-5 capitalize text-5xl">{name}</h4>
-                  <div className="text-xl font-bold flex">
-                    <Currency quantity={price} currency="GBP" />
-                  </div>
-                <div className="flex items-center gap-2">
-
-                  <div className="flex">
-                    {Array(rating)
-                      ?.fill()
-                      ?.map((_, i) => (
-                        <AiFillStar
-                          key={i}
-                          size={16}
-                          className="text-yellow-500"
-                        />
-                      ))}
-                  </div>
-                  
-                  <p className="underline cursor-pointer">{ratingCounter} ratings</p>
-                </div>
-{/* colors  */}
-                <div className="flex gap-2 items-center">
-                <p>Colors: </p>
-                  {colors?.map((v, i) => (
-                    <div
-                      key={i}
-                      className={`w-4 h-4 rounded-full shadow-lg`}
-                      style={{background:v}}
-                    ></div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint
-              perferendis nesciunt ullam laudantium? Expedita molestias
-              cupiditate rem possimus enim assumenda ratione odio, odit, culpa
-              ut officia voluptatibus. Voluptatibus distinctio quis facilis
-              delectus sint consectetur, dolorem dolorum? Quo quae tempore
-              distinctio dolorem perspiciatis quos voluptates iure sed veniam
-              reiciendis unde maiores deleniti quidem aspernatur ipsa pariatur
-              corrupti similique fuga quam, libero placeat temporibus aliquam
-              dolore. Eius iure, officia fugiat doloribus ab minus autem. Ipsa
-              necessitatibus animi fugiat, ipsam placeat eos tempora cupiditate
-              illum minima accusamus quibusdam, rerum nam tenetur aut mollitia
-              voluptatibus, laborum modi dolorem quaerat odio eum sapiente cum?
-              Eos!
-            </div>
-          </div>
-        </div>
-      )}
+      {ismodel && <ModelProduct image={image} handelBasket={handelBasket} Ismodelhandeler={Ismodelhandeler} name={name} price={price} colors={colors} company={company} /> }
+      
     </>
   );
 }

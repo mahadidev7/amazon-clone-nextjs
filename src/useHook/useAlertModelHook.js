@@ -9,9 +9,12 @@ function useAlertModelHook() {
 
     const handelMessage = (data) => {
         if(!data) return
-        dispatch(getmessage({server: data?.server, message: data?.message}))
-        setTextMessage(data?.message)
-        setIsAlert(true)
+        dispatch(getmessage({server: 0, message: ""}))
+        setTimeout(() => {
+          dispatch(getmessage({server: data?.server, message: data?.message}))
+          setTextMessage(data?.message)
+          setIsAlert(true)
+        }, 30);
         // clearTimeout(startTimer)
         // starttimer()
 
