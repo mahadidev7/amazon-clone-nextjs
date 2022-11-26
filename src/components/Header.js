@@ -5,10 +5,27 @@ import { BsSearch } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { selectCarts } from '../slices/basketSlice';
 import { signIn, signOut, useSession } from 'next-auth/react'
+import useAlertModelHook from '../useHook/useAlertModelHook';
 
 const Header = () => {
     const carts = useSelector(selectCarts)
     const {data: session} = useSession()
+    const { handelMessage } = useAlertModelHook();
+
+    const AuthLogIn = () => {
+        // session ? signOut : signIn
+        if(session){
+            signOut()
+            handelMessage({ server: 200, message: "Sign out Successfully" });
+            return
+        }
+        if(!session){
+            signIn()
+            handelMessage({ server: 200, message: "sign in Successfully" });
+            return
+        }
+    }
+    
 
   return (
     <header id='top'>
@@ -37,14 +54,13 @@ const Header = () => {
 
             {/* Right */}
             <div className='text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap py-2'>
-                <div onClick={session ? signOut : signIn } className='link'>
+                <div onClick={()=>AuthLogIn()} className='link'>
                 <p>
                 {
                     session ? `Hello, ${session?.user?.name} `: 'Sign in'
                 }
-                </p> 
-                    <p className='font-extrabold md:text-sm'>Account & Lists</p> 
-
+                </p>
+                <p className='font-extrabold md:text-sm'>Account & Lists</p> 
                 </div>
                 <div className=' link'>
                     <p>Returns</p>
