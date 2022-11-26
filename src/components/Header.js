@@ -4,10 +4,11 @@ import { AiOutlineMenu, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { selectCarts } from '../slices/basketSlice';
-import { signIn } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Header = () => {
     const carts = useSelector(selectCarts)
+    const {data: session} = useSession()
 
   return (
     <header id='top'>
@@ -36,8 +37,12 @@ const Header = () => {
 
             {/* Right */}
             <div className='text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap py-2'>
-                <div onClick={signIn} className='link'>
-                    <p>Hello Mahadidev7</p>
+                <div onClick={session ? signOut : signIn } className='link'>
+                <p>
+                {
+                    session ? `Hello, ${session?.user?.name} `: 'Sign in'
+                }
+                </p> 
                     <p className='font-extrabold md:text-sm'>Account & Lists</p> 
 
                 </div>
