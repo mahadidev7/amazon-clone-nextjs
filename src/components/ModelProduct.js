@@ -5,70 +5,71 @@ import { AiFillStar } from "react-icons/ai";
 import RelatedProduct from './RelatedProduct';
 const MAX_RATING = 5;
 const MIN_RATING = 1;
+const ProductImages = [
+  "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2R1Y3R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHByb2R1Y3R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHByb2R1Y3R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+  "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+]
 
 function ModelProduct({image,Ismodelhandeler,handelBasket, name, price, colors, company}) {
     const [productQuantaty, setProductQuantaty] = useState(10);
+    const [productImg, setProductImg] = useState(image);
     // rating  function 
     const [rating] = useState(
         Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
     );
     const ratingCounter =  Math.floor(Math.random() * 200) 
 
-    const ProductQuntiter= (data)=> {
-        if (data === 0) {
-            if(productQuantaty === 0) return
-            setProductQuantaty((productQuantaty)=> productQuantaty-1 )
-        }
-        if (data === 1) {
-            setProductQuantaty((productQuantaty)=> productQuantaty+1 )
-        }
-    }
+    // const ProductQuntiter= (data)=> {
+    //     if (data === 0) {
+    //         if(productQuantaty === 0) return
+    //         setProductQuantaty((productQuantaty)=> productQuantaty-1 )
+    //     }
+    //     if (data === 1) {
+    //         setProductQuantaty((productQuantaty)=> productQuantaty+1 )
+    //     }
+    // }
+
   return (
     <div className="informationModel z-20 flex items-center justify-center" >
           <div className="w-5/6 h-5/6 bg-white mx-auto p-4 overflow-y-auto rounded-md">
             <div className="flex gap-9">
+          {/* left site  */}
               <div className="w-3/5 h-3/4 border rounede-lg ">
                 <div className="w-full h-5/6 flex items-center justify-center">
                   <img
                     loading="lazy"
-                    src={image}
+                    src={productImg}
                     alt="product image"
                     className="w-[100%] h-[500px] object-contain p-1 rounded-md"
                   />
                 </div>
-                <div className="flex gap-2 py-2 px-2 w-full h-1/6 border">
+                <div className="flex !flex-wrap gap-2 p-2 overflow-hidden h-1/6 border">
                   <img
                     loading="lazy"
                     src={image}
+                    onClick={()=>setProductImg(image)}
                     alt="product image"
-                    className="w-14 h-14 border-2 border-black object-fill rounded cursor-pointer"
+                      className="w-14 h-14 border-2 border-black object-fill rounded cursor-pointer"
                   />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
-                  <img
-                    loading="lazy"
-                    src={image}
-                    alt="product image"
-                    className="w-14 border-2 border-black h-14 object-fill rounded cursor-pointer"
-                  />
+                {
+                  ProductImages?.map((image, i)=>(
+                    <img
+                      loading="lazy"
+                      key={i}
+                      src={image}
+                      onClick={()=>setProductImg(image)}
+                      alt="product image"
+                      className="w-14 h-14 border-2 border-black object-fill rounded cursor-pointer"
+                    />
+                  ))
+                }
+                  
                 </div>
               </div>
+            {/* right site */}
               <div className="w-2/5 p-20 relative flex flex-col justify-center">
               <FaTimes className="absolute top-0 right-0 border-2 border-black cursor-pointer text-2xl bg-yellow-400 rounded" onClick={Ismodelhandeler}/>
             {/* name, rating , price */}

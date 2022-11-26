@@ -4,7 +4,7 @@ import { AiOutlineMenu, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { selectCarts } from '../slices/basketSlice';
-
+import { signIn } from 'next-auth/react'
 
 const Header = () => {
     const carts = useSelector(selectCarts)
@@ -36,7 +36,7 @@ const Header = () => {
 
             {/* Right */}
             <div className='text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap py-2'>
-                <div className=' link'>
+                <div onClick={signIn} className='link'>
                     <p>Hello Mahadidev7</p>
                     <p className='font-extrabold md:text-sm'>Account & Lists</p> 
 
