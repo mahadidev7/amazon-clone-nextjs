@@ -1,0 +1,7 @@
+amaxon 2.0 
+
+page:
+    HOME PAGE
+
+google login 
+ --- next auth

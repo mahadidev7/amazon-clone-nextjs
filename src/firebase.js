@@ -1,4 +1,5 @@
 import firestore from "firebase";
+import { initializeApp } from "firebase-admin";
 
 const firebaseConfig = {
     apiKey: "AIzaSyD3ntMJWOuWwUlJe-1uiH7QKp3pCnb_o9I",
@@ -8,3 +9,6 @@ const firebaseConfig = {
     messagingSenderId: "166350771086",
     appId: "1:166350771086:web:fb6fe9e5e1ee620fb2cadf"
   };
+
+//   init firebase app 
+  initializeApp(firebaseConfig)
