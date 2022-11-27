@@ -18,6 +18,7 @@ function ProductItem({
   image,
   colors,
   company,
+  review
 }) {
   const [ismodel, setIsmodel] = useState(false);
   const [state, setstate] = useState(1);
@@ -93,7 +94,7 @@ function ProductItem({
       </div>
 
       {/* MODEL  */}
-      {ismodel && <ModelProduct image={image} handelBasket={handelBasket} Ismodelhandeler={Ismodelhandeler} name={name} price={price} colors={colors} company={company} /> }
+      {ismodel && <ModelProduct image={image} handelBasket={handelBasket} Ismodelhandeler={Ismodelhandeler} name={name} price={price} colors={colors} company={company} review={review} /> }
       
     </>
   );

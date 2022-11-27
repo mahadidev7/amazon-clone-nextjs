@@ -13,15 +13,14 @@ const ProductImages = [
   "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
 ]
 
-function ModelProduct({image,Ismodelhandeler,handelBasket, name, price, colors, company}) {
+function ModelProduct({image,Ismodelhandeler,handelBasket, name, price, colors, company, review}) {
     const [productQuantaty, setProductQuantaty] = useState(10);
     const [productImg, setProductImg] = useState(image);
     // rating  function 
     const [rating] = useState(
         Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
     );
-    const ratingCounter =  Math.floor(Math.random() * 200) 
-
+ 
     // const ProductQuntiter= (data)=> {
     //     if (data === 0) {
     //         if(productQuantaty === 0) return
@@ -91,7 +90,7 @@ function ModelProduct({image,Ismodelhandeler,handelBasket, name, price, colors, 
                       ))}
                   </div>
                   
-                  <p className="underline cursor-pointer">{ratingCounter} ratings</p>
+                  <p className="underline cursor-pointer">{review} ratings</p>
                 </div>
             {/* colors  */}
                 <div className="flex gap-2 items-center">

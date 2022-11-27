@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from "next/image";
 import { AiOutlineMenu, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
@@ -6,8 +6,13 @@ import { useSelector } from 'react-redux';
 import { selectCarts } from '../slices/basketSlice';
 import { signIn, signOut, useSession } from 'next-auth/react'
 import useAlertModelHook from '../useHook/useAlertModelHook';
+import Currency from "react-currency-formatter";
 
-const Header = () => {
+const Header = ({products}) => { 
+    const [searchTerm, setSearchTerm] = useState('')
+    const [searchResults, setSearchResults] = useState([])
+    const [showResults, setShowResults] = useState(true)
+
     const carts = useSelector(selectCarts)
     const {data: session} = useSession()
     const { handelMessage } = useAlertModelHook();
@@ -21,12 +26,21 @@ const Header = () => {
         }
         if(!session){
             signIn()
-            handelMessage({ server: 200, message: "sign in Successfully" });
+            // handelMessage({ server: 200, message: "sign in Successfully" });
             return
         }
     }
-    
 
+    const handleSearch = e => {
+        let trem = e.target.value
+        trem = trem.toLowerCase()
+        setSearchTerm(trem)
+
+        setSearchResults(products?.filter(product => product.name.includes(trem) || product.category.includes(trem) || product.company.includes(trem)))
+        
+    }
+    
+console.log(searchResults);
   return (
     <header id='top'>
         {/* // top mav  */}
@@ -43,13 +57,45 @@ const Header = () => {
             </div>
 
             {/* Search  */}
-            <div className='hidden sm:flex items-center h-10 cursor-pointer  rounded-md flex-grow overflow-hidden'>
-                <div className='bg-white border flex justify-center items-center px-3 gap-1'>
-                    <AiOutlineMenu className="h-12 text-bold " color='#000' size={16} />
+            <div className='hidden relative sm:flex items-center h-10 cursor-pointer  rounded-md flex-grow bg-white'>
+                <div className='hidden bg-white text-bold border-r md:flex justify-center items-center px-3 gap-1 rounded-tl-md rounded-bl-md'>
+                    <AiOutlineMenu className="h-10 text-bold" color='#000' size={16} />
                     <p>All</p>
                 </div>
-                <input type="text" className='p-2 h-full w-6 flex-grow flex-shrink  focus:outline-none px-4' placeholder='Search....' />
-                <BsSearch className="h-12 p-4 text-bold bg-yellow-400 hover:bg-yellow-500" color='#000' size={60} />
+                <input
+                    onMouseOver={() => setShowResults(true)} 
+                    onBlur={() => setShowResults(false)} 
+                    onFocus={() => setShowResults(true)} 
+                    value={searchTerm} 
+                    onChange={handleSearch}
+                    type="text" 
+                    className='p-2 h-full w-6 flex-grow flex-shrink  focus:outline-none px-4 rounded' 
+                    placeholder='Search....' 
+                />
+                <BsSearch className="h-10 p-3 text-bold bg-yellow-400 hover:bg-yellow-500 rounded-tr-md rounded-br-md" color='#000' size={60} />
+
+                {showResults && (
+                        <div onClick={() => setShowResults(true)} onMouseOver={() => setShowResults(true)} onMouseLeave={() => setShowResults(false)} className="absolute w-full bg-white bottom-0 z-40 rounded-md" style={{ transform: 'translateY(100%)', height: 'auto', maxHeight: '400px', overflowY: 'auto' }}>
+                            {(!!searchResults?.length) ? searchResults.map(({id, name, price, category}) => (
+                                <div key={Math.random()} className="p-2 mt-2 border-b-2 rounded-md border-gray-100 bg-gray-50 flex justify-between items-center">
+                                    
+                                    <div>
+                                        <h5 className="font-medium text-sm text-gray-600">{name}</h5>
+                                        <p className="text-xs text-gray-400">{category} </p>
+                                    </div>
+                                    <div className='flex justify-between items-center text-sm text-gray-600'>
+                                        <Currency quantity={price} currency="GBP" />
+                                    </div>
+
+
+                                </div>
+                            )) : (
+                                <>
+                                    {searchTerm && <p className="text-xs text-gray-400 text-center py-2">No product found</p>}
+                                </>
+                            )}
+                        </div>
+                    )}
             </div>
 
             {/* Right */}

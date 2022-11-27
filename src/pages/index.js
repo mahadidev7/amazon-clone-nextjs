@@ -18,7 +18,7 @@ export default function Home({products}) {
 
   useEffect(() => {
     dispatch(addToBasket(products))
-  }, []);
+  }, [products]);
   
   return (
     <div className="bg-gray-100 relative">
@@ -27,7 +27,7 @@ export default function Home({products}) {
       </Head>
 
     {/* Header start */}
-      <Header />
+      <Header products={products} />
     {/* Header end */}
 
     {/* main start */}
@@ -57,6 +57,8 @@ export async function getServerSideProps(context){
   const products = await fetch("https://course-api.com/react-store-products").then(
     (res)=> res.json()
   );
+  const ratingCounter =  Math.floor(Math.random() * 200)
+  products?.map(item => item.review=Math.floor(Math.random() * 200))
 
   return {
     props: {

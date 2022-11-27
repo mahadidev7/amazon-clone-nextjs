@@ -41,3 +41,10 @@ html {
     width: 100vw;
     height: 100vh;
 }
+.showResults{
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+}
