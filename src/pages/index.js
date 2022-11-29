@@ -27,7 +27,7 @@ export default function Home({products}) {
       </Head>
 
     {/* Header start */}
-      <Header products={products} />
+      <Header />
     {/* Header end */}
 
     {/* main start */}
@@ -57,8 +57,17 @@ export async function getServerSideProps(context){
   const products = await fetch("https://course-api.com/react-store-products").then(
     (res)=> res.json()
   );
-  const ratingCounter =  Math.floor(Math.random() * 200)
-  products?.map(item => item.review=Math.floor(Math.random() * 200))
+
+  products?.map(item => {
+    return (
+      // add new rating mathord for Products because is not available in API
+      item.rating=Array(Math.floor(Math.random() * (5 - 1 + 1)) + 1)?.fill(1),
+      // add new review mathord for Products because is not available in API
+      item.review=Math.floor(Math.random() * 200),
+      // add new hasPrime mathord for Products because is not available in API
+      item.hasPrime=Math.random() < 0.5
+    )
+  })
 
   return {
     props: {

@@ -1,7 +1,12 @@
 amaxon 2.0 
 
-page:
+Pages:
     -HOME PAGE
+        * live search feture
+        * Product add in REDUX with ERROR handelling
+        
+    -CHACKOUT PAGE
 
-login system :
+
+Login System :
     -next auth(google login)

@@ -4,7 +4,7 @@ import { Carousel } from 'react-responsive-carousel'
 
 function Banner() {
   return (
-    <div className='relative'>
+    <div className='relative' id='top'>
         <div className='absolute bottom-0 z-10 w-full h-20 bg-gradient-to-t from-white to-transparent ' />
         <Carousel
             autoPlay

@@ -13,7 +13,7 @@ const ProductImages = [
   "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
 ]
 
-function ModelProduct({image,Ismodelhandeler,handelBasket, name, price, colors, company, review}) {
+function ModelProduct({id,image,Ismodelhandeler,handelBasket, name, price, colors, company, review}) {
     const [productQuantaty, setProductQuantaty] = useState(10);
     const [productImg, setProductImg] = useState(image);
     // rating  function 
@@ -113,7 +113,7 @@ function ModelProduct({image,Ismodelhandeler,handelBasket, name, price, colors, 
                   </div> */}
                   <button
                     className="mt-auto w-full mb:text-sm button"
-                    onClick={() => handelBasket()}
+                    onClick={() => handelBasket(id)}
                   >
                     Add to Basket
                   </button>
