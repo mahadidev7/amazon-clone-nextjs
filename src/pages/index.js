@@ -7,7 +7,7 @@ import CustomModel from "../components/CustomModel";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
-import { addToBasket, selectProducts } from "../slices/basketSlice";
+import { addToProduct } from "../slices/basketSlice";
 import { selectServer } from "../slices/mahadiSlice";
 import useAlertModelHook from "../useHook/useAlertModelHook";
 
@@ -17,7 +17,7 @@ export default function Home({products}) {
   const sliceServer = useSelector(selectServer)
 
   useEffect(() => {
-    dispatch(addToBasket(products))
+    dispatch(addToProduct(products))
   }, [products]);
   
   return (

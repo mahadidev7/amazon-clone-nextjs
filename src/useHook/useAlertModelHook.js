@@ -14,7 +14,7 @@ function useAlertModelHook() {
           dispatch(getmessage({server: data?.server, message: data?.message}))
           setTextMessage(data?.message)
           setIsAlert(true)
-        }, 30);
+        }, 300);
         // clearTimeout(startTimer)
         // starttimer()
 

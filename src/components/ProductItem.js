@@ -1,9 +1,9 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Currency from "react-currency-formatter";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCarts, selectCarts, selectProducts } from "../slices/basketSlice";
+import { addToCart, selectCarts, selectProducts } from "../slices/basketSlice";
 import useAlertModelHook from "../useHook/useAlertModelHook";
 import ModelProduct from "./ModelProduct";
 const MAX_RATING = 5;
@@ -23,34 +23,39 @@ function ProductItem({
   hasPrime
 }) {
   const [ismodel, setIsmodel] = useState(false);
-  const [state, setstate] = useState(1);
+  const [isproduct, setIsproduct] = useState(false);
   const dispatch = useDispatch();
   const ReduxCarts = useSelector(selectCarts);
   const ReduxProducts = useSelector(selectProducts);
   const { handelMessage } = useAlertModelHook();
 
-// rating  function 
-  // const [rating] = useState(
-  //   Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
-  // );
-
 // cart function
   const handelBasket = (id) => {
     const filterCartData = ReduxCarts.filter((item) => item.id === id);
-    if (!!filterCartData.length) {
+    if (isproduct) {
       // alert("Product already added")
       handelMessage({ server: 400, message: "Product Already Added" });
       return;
     } else {
+      setIsproduct(true)
       // SENDING THE PRODUCT AS AN ACTION TO THE REDUX STORE ...... THE CARTS OF BASKET SLICE
-      dispatch(addToCarts(...ReduxProducts.filter((item) => item.id === id)));
+      dispatch(addToCart(...ReduxProducts.filter((item) => item.id === id)));
       handelMessage({ server: 200, message: "Product Success Add" });
+      
     }
   };
 // is model 
   const Ismodelhandeler=()=>{
     setIsmodel(!ismodel)
   }
+
+  useEffect(() => {
+    const filterCartData = ReduxCarts.filter((item) => item.id === id);
+    if (!!filterCartData.length) {
+      setIsproduct(true)
+      return;
+    }
+  }, []);
 
   return (
     <>
@@ -84,10 +89,13 @@ function ProductItem({
             </div>
           )}
           <button
-            className="mt-auto w-full mb:text-sm button"
+            className={`mt-auto w-full mb:text-sm  ${isproduct ? 'from-gray-300 to-gray-500 bg-gray-300 rounded p-1 border-gray-200 text-black cursor-not-allowed' : 'button'}`}
             onClick={() => handelBasket(id)}
           >
-            Add to Basket
+          {
+            isproduct ? "Added" : 'Add to Basket'
+          }
+            
           </button>
         </div>
       </div>
