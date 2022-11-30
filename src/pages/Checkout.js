@@ -1,32 +1,38 @@
-import Image from 'next/image'
-import React from 'react'
-import { useSelector } from 'react-redux';
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Currency from "react-currency-formatter";
-import CheckoutProduct from '../components/CheckoutProduct';
-import CustomModel from '../components/CustomModel';
-import Header from '../components/Header'
-import { selectCarts, selectBaskets, selectTotalPrice } from '../slices/basketSlice';
-import { selectServer } from '../slices/mahadiSlice';
-import { useSession } from 'next-auth/react';
-import BackToTop from "../components/BackToTop"
-import Footer from "../components/Footer"
+import CheckoutProduct from "../components/CheckoutProduct";
+import CustomModel from "../components/CustomModel";
+import Header from "../components/Header";
+import {
+  selectCarts,
+} from "../slices/basketSlice";
+import { selectServer } from "../slices/mahadiSlice";
+import { useSession } from "next-auth/react";
+import BackToTop from "../components/BackToTop";
+import Footer from "../components/Footer";
 
 function Checkout() {
-  const ReduxBaskets = useSelector(selectBaskets);
+  // const ReduxBaskets = useSelector(selectBaskets);
   const ReduxCarts = useSelector(selectCarts);
-  const ReduxTotalPrice = useSelector(selectTotalPrice);
-  const sliceServer = useSelector(selectServer)
-  const {data: session} = useSession()
+  const [ReduxBaskets, setReduxBaskets] = useState([]);
+  const sliceServer = useSelector(selectServer);
+  const { data: session } = useSession();
+  const ReduxTotalPrice = ReduxBaskets?.reduce((total, item)=> total + item.totalPrice, 0 )
+  const proceedhandeler = () => {
+    alert("123");
+  };
 
-  const proceedhandeler =()=> {
-      alert("123")
-
-  }
+  useEffect(() => {
+    setReduxBaskets(ReduxCarts.filter((item) => item.shopping === true))
+  }, [ReduxCarts]);
 
   return (
-    <div className='bg-gray-100'>
+    <div className="bg-gray-100">
       <Header />
-      <div className='flex items-center justify-center'>
+      {/* Chackout page banner  */}
+      <div className="flex items-center justify-center">
         <Image
           src="https://links.papareact.com/ikj"
           width={1020}
@@ -34,50 +40,89 @@ function Checkout() {
           objectFit="contain"
         />
       </div>
-      <main className='md:grid md:grid-cols-7 max-w-screen-2xl mx-auto '>
+      {/* main body */}
+      <main className="md:grid md:grid-cols-7 max-w-screen-2xl mx-auto ">
         {/* Left  */}
-        <div className='md:m-3 m-1 shadow-sm col-span-5'>
-
-          <div className='flex flex-col space-y-10 bg-white md:p-5 p-1 rounded'>
-            <h1 className='text-3xl border-b pb-4 font-bold'>
-              {
-                ReduxCarts.length === 0 ? "Your Amazon Basket is empty" : "Shopping Basket "
-              }
+        <div className="md:m-3 m-1 shadow-sm col-span-5">
+          <div className="flex flex-col space-y-10 bg-white md:p-5 p-1 rounded">
+            <h1 className="text-3xl border-b pb-4 font-bold">
+              {ReduxCarts.length === 0
+                ? "Your Amazon Basket is empty"
+                : "Shopping Basket "}
             </h1>
-
-            {
-              ReduxCarts?.map((item, i) => <CheckoutProduct key={i} {...item} />)
+            {ReduxCarts.length === 0 &&
+              <Image
+                src={`https://i.ibb.co/cLdVCws/df.jpg`}
+                width={300}
+                height={250}
+                objectFit="contain"
+              />
+   
             }
-
+            {/* cart product Lists  */}
+            {ReduxCarts?.map((item, i) => (
+              <CheckoutProduct key={i} {...item} />
+            ))}
           </div>
         </div>
 
-
         {/* Right  */}
-        <div className='shadow-md flex flex-col bg-white p-3 col-span-2 md:mt-3 my-5' >
-          <h2 className='text-2xl border-b pb-4 text-center'>Subtotal ({ReduxBaskets.length} items){": "} 
-            <spam className="font-bold">
-            <Currency quantity={ReduxTotalPrice} currency="GBP" />
-            </spam>
+        <div className="shadow-md flex flex-col bg-white p-3 col-span-2 md:mt-3 my-5">
+          <h2 className="text-2xl border-b pb-4 text-center mb-9">
+            Subtotal ({ReduxBaskets.length} items)
           </h2>
+
+          {ReduxBaskets?.map((v, i) => {
+            return (
+              <div className="grid grid-cols-5 border-b p-3" key={i}>
+                <p className="col-span-3 capitalize">
+                  ({i + 1}) {v.name}
+                </p>
+                <div className="col-span-2 flex gap-1">
+                  <p>=</p>
+                  <p>
+                    <Currency quantity={v.totalPrice} currency="GBP" />
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+
+          <div className="grid grid-cols-5 font-semibold uppercase mt-5">
+            <p className="col-span-3 text-right pr-4"> Total Price</p>
+
+            <div className="col-span-2 flex gap-1">
+              <p>=</p>
+              <p>
+                <Currency quantity={ReduxTotalPrice} currency="GBP" />
+              </p>
+            </div>
+          </div>
+
+          {/* proced Button */}
           <button
             disabled={!session}
-            className={`button mt-2 ${!session && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed'}`} onClick={proceedhandeler}>
-            {
-              !session ? "Sign in to chechout" : "Proceed to chechout"
-            }
+            className={`button mt-10 ${
+              !session &&
+              "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
+            } `}
+            onClick={proceedhandeler}
+          >
+            {!session ? "Sign in to chechout" : "Proced to chechout"}
           </button>
         </div>
       </main>
+
       {/* footer start  */}
       <footer>
         <BackToTop />
         <Footer />
       </footer>
-    {/* footer end  */}
-    { sliceServer === 0 ? '' : <CustomModel /> }
+      {/* footer end  */}
+
+      {sliceServer === 0 ? "" : <CustomModel />}
     </div>
-  )
+  );
 }
 
-export default Checkout
+export default Checkout;

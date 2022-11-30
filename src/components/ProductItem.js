@@ -20,7 +20,10 @@ function ProductItem({
   company,
   rating,
   review,
-  hasPrime
+  hasPrime,
+  totalPrice,
+  quantity,
+  shopping,
 }) {
   const [ismodel, setIsmodel] = useState(false);
   const [isproduct, setIsproduct] = useState(false);
@@ -31,7 +34,24 @@ function ProductItem({
 
 // cart function
   const handelBasket = (id) => {
-    const filterCartData = ReduxCarts.filter((item) => item.id === id);
+    
+    const product = {
+      id,
+      name,
+      price,
+      description,
+      category,
+      image,
+      colors,
+      company,
+      rating,
+      review,
+      hasPrime,
+      totalPrice,
+      quantity,
+      shopping,
+    }
+
     if (isproduct) {
       // alert("Product already added")
       handelMessage({ server: 400, message: "Product Already Added" });
@@ -39,8 +59,8 @@ function ProductItem({
     } else {
       setIsproduct(true)
       // SENDING THE PRODUCT AS AN ACTION TO THE REDUX STORE ...... THE CARTS OF BASKET SLICE
-      dispatch(addToCart(...ReduxProducts.filter((item) => item.id === id)));
-      handelMessage({ server: 200, message: `"${name}" - This Product added to cart ` });
+      dispatch(addToCart(product));
+      handelMessage({image, server: 200, message: `${name} - This Product added to cart ` });
       
     }
   };
@@ -90,11 +110,11 @@ function ProductItem({
           )}
           <button
             disabled={isproduct}
-            className={`mt-auto w-full mb:text-sm  ${isproduct ? 'from-gray-300 to-gray-500 bg-gray-300 rounded p-1 border-gray-200 text-black cursor-not-allowed' : 'button'}`}
+            className={`mt-auto w-full mb:text-sm  ${isproduct ? 'bg-gray-300 rounded p-1 text-black cursor-not-allowed' : 'button'}`}
             onClick={() => handelBasket(id)}
           >
           {
-            isproduct ? "Added to Cart" : 'Add to Basket'
+            isproduct ? "Added to Basket" : 'Add to Basket'
           }
             
           </button>

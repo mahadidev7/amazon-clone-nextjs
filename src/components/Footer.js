@@ -51,7 +51,7 @@ function Footer() {
                     objectFit="contain"
                     className='cursor-pointer'
                 />
-                <p>This is a Portfolio Demo Website. create by <a className='underline bg-[#090d11] p-2 rounded' target="__blank" href="https://mahadidev7-portfolio.web.app/">Mahadidev7</a></p>
+                <p className='text-sm'>This is a Portfolio Demo Website. create by <a className='underline bg-[#090d11] p-2 rounded' target="__blank" href="https://mahadidev7-portfolio.web.app/">Mahadidev7</a></p>
             </div>
         </div>
         

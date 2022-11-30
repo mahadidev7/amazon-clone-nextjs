@@ -11,7 +11,7 @@ function useAlertModelHook() {
         if(!data) return
         dispatch(getmessage({server: 0, message: ""}))
         setTimeout(() => {
-          dispatch(getmessage({server: data?.server, message: data?.message}))
+          dispatch(getmessage({image: data?.image, server: data?.server, message: data?.message}))
           setTextMessage(data?.message)
           setIsAlert(true)
         }, 300);

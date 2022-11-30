@@ -65,7 +65,13 @@ export async function getServerSideProps(context){
       // add new review mathord for Products because is not available in API
       item.review=Math.floor(Math.random() * 200),
       // add new hasPrime mathord for Products because is not available in API
-      item.hasPrime=Math.random() < 0.5
+      item.hasPrime=Math.random() < 0.5,
+      // add new totalPrice mathord for Products because is not available in API
+      item.totalPrice= item.price,
+      // add new quantity mathord for Products because is not available in API
+      item.quantity=1,
+      // add new shopping mathord for Products because is not available in API
+      item.shopping=false
     )
   })
 
