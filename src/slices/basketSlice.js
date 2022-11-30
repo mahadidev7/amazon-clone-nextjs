@@ -58,5 +58,6 @@ export const { addToProduct, addToCart, addToBasket, removeFromBasket, removeFro
 export const selectProducts = (state) => state.basket.products;
 export const selectCarts = (state) => state.basket.carts;
 export const selectBaskets = (state) => state.basket.baskets;
+export const selectTotalPrice = (state) => state.basket.baskets.reduce((total, item)=> total + item.price, 0 )
 
 export default basketSlice.reducer;

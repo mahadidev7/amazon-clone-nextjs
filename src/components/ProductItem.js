@@ -40,7 +40,7 @@ function ProductItem({
       setIsproduct(true)
       // SENDING THE PRODUCT AS AN ACTION TO THE REDUX STORE ...... THE CARTS OF BASKET SLICE
       dispatch(addToCart(...ReduxProducts.filter((item) => item.id === id)));
-      handelMessage({ server: 200, message: "Product Success Add" });
+      handelMessage({ server: 200, message: `"${name}" - This Product added to cart ` });
       
     }
   };
@@ -55,7 +55,7 @@ function ProductItem({
       setIsproduct(true)
       return;
     }
-  }, []);
+  }, [isproduct]);
 
   return (
     <>
@@ -89,11 +89,12 @@ function ProductItem({
             </div>
           )}
           <button
+            disabled={isproduct}
             className={`mt-auto w-full mb:text-sm  ${isproduct ? 'from-gray-300 to-gray-500 bg-gray-300 rounded p-1 border-gray-200 text-black cursor-not-allowed' : 'button'}`}
             onClick={() => handelBasket(id)}
           >
           {
-            isproduct ? "Added" : 'Add to Basket'
+            isproduct ? "Added to Cart" : 'Add to Basket'
           }
             
           </button>

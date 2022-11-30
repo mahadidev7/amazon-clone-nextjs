@@ -82,7 +82,7 @@ function CheckoutProduct({
           )}
         </div>
     {/* Right side  */}
-        <div className='flex flex-col gap-2 my-2 col-span-3 md:col-span-1'>
+        <div className='flex flex-col gap-2 my-2 col-span-3 md:col-span-1 md:pl-3'>
             {
               !!ReduxBaskets.filter((item) => item.id === id).length 
               ?

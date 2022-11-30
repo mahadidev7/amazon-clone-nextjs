@@ -1,11 +1,16 @@
 amaxon 2.0 
 
 Pages:
-    -HOME PAGE
+    -HOME PAGE FETURE
         * live search feture
-        * Product add in REDUX with ERROR handelling
+        * Product add in REDUX, ERROR handelling with pop up alert message
         
-    -CHACKOUT PAGE
+    -CHACKOUT PAGE FETURE
+        * Product Delete feture
+        * Add to Basket Button
+
+Other Fetures:
+    * pop up alert message
 
 
 Login System :
