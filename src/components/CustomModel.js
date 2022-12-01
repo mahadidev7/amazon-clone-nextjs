@@ -11,14 +11,14 @@ function CustomModel() {
   const sliceServer = useSelector(selectServer)
   
   const {handelMessage} = useAlertModelHook()
-  // const [animation, setAnimation] = useState('animate-bounce');
+  const [animation, setAnimation] = useState('animate-bounce');
   const [isTrue, setIsTrue] = useState(true);
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setAnimation('animate-none')
-  //   }, 2500);
-  // }, []);
+  useEffect(() => {
+    setInterval(() => {
+      setAnimation('animate-none')
+    }, 2500);
+  }, []);
 
   // useEffect(() => {
   //   setInterval(() => {
@@ -31,7 +31,7 @@ function CustomModel() {
     <>
       {
         isTrue ? (
-          <div className={` ${ sliceServer === 200 ? 'bg-[#51a351]' : 'bg-[#bd362f]'} modelStyle z-20 animate-bounce hover:animate-none shadow-lg`}>
+          <div className={` ${ sliceServer === 200 ? 'bg-[#51a351]' : 'bg-[#bd362f]'} ${animation} modelStyle z-20 animate-bounce hover:animate-none shadow-lg`}>
           <div className='flex items-center gap-1'>
               {
                 img &&
@@ -51,7 +51,7 @@ function CustomModel() {
           </div>
         )
         : (
-          <div className={` ${ sliceServer === 200 ? 'bg-[#51a351]' : 'bg-[#bd362f]'} modelStyle z-20 animate-bounce hover:animate-none shadow-lg`}>
+          <div className={` ${ sliceServer === 200 ? 'bg-[#51a351]' : 'bg-[#bd362f]'} ${animation} modelStyle z-20 animate-bounce hover:animate-none shadow-lg`}>
             <p className={`text-white capitalize text-sm`}>{ `${textMessage}` }</p>
             <FaTimes size={18} color="#fff" className='cursor-pointer' onClick={()=> handelMessage({server: 0, message:""})} />
           </div>

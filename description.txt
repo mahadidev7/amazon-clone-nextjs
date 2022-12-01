@@ -4,6 +4,7 @@ Pages:
     -HOME PAGE FETURE
         * live search feture
         * Product add in REDUX, ERROR handelling with pop up alert message
+        * Product model popup when click the product name or product image
         
     -CHACKOUT PAGE FETURE
         * Product Delete feture

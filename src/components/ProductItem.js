@@ -54,13 +54,13 @@ function ProductItem({
 
     if (isproduct) {
       // alert("Product already added")
-      handelMessage({ server: 400, message: "Product Already Added" });
+      handelMessage({ server: 400, message: "Product Already Added to Basket" });
       return;
     } else {
       setIsproduct(true)
       // SENDING THE PRODUCT AS AN ACTION TO THE REDUX STORE ...... THE CARTS OF BASKET SLICE
       dispatch(addToCart(product));
-      handelMessage({image, server: 200, message: `${name} - This Product added to cart ` });
+      handelMessage({image, server: 200, message: `${name} - This Product added to Basket ` });
       
     }
   };
@@ -113,16 +113,14 @@ function ProductItem({
             className={`mt-auto w-full mb:text-sm  ${isproduct ? 'bg-gray-300 rounded p-1 text-black cursor-not-allowed' : 'button'}`}
             onClick={() => handelBasket(id)}
           >
-          {
-            isproduct ? "Added to Basket" : 'Add to Basket'
-          }
+          {isproduct ? "Added to Basket" : 'Add to Basket' }
             
           </button>
         </div>
       </div>
 
       {/* MODEL  */}
-      {ismodel && <ModelProduct image={image} handelBasket={handelBasket} Ismodelhandeler={Ismodelhandeler} id={id} name={name} price={price} colors={colors} company={company} review={review} /> }
+      {ismodel && <ModelProduct image={image} handelBasket={handelBasket} Ismodelhandeler={Ismodelhandeler} id={id} name={name} price={price} colors={colors} company={company} review={review} isproduct={isproduct} /> }
       
     </>
   );
