@@ -1,6 +1,10 @@
 
 # AMAZON-2.0 CLONE WITH NEXT JS
 
+    -Tools
+        * NEXT JS
+        * TAILWIND CSS
+
 FETURES: <br/>
 
     -HOME PAGE FETURE:
