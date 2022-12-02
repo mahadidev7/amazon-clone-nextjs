@@ -133,15 +133,33 @@ const Header = () => {
                 <AiOutlineMenu size={25}/>
                 All
             </p> */}
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Prime Video</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Amazon Business</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Today's Deals</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Electronics</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Food & Grocery</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Prime</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Buy Again</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Shopper Toolkit</p>
+            </Link>
+            <Link href={'./Allproduct'}>
             <p className='link whitespace-nowrap'>Health  & Personal Care</p>
+            </Link>
         </div>
     </header>
   )
