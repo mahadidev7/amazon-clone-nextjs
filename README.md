@@ -1,4 +1,3 @@
-
 # AMAZON-2.0 CLONE WITH NEXT JS
 
     -Tools
