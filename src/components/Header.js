@@ -62,10 +62,13 @@ const Header = () => {
 
             {/* Search  */}
             <div className='hidden relative sm:flex items-center h-10 cursor-pointer rounded-md flex-grow bg-white'>
-                <div className='hidden bg-white text-bold border-r md:flex justify-center items-center px-3 gap-1 rounded-tl-md rounded-bl-md'>
-                    <AiOutlineMenu className="h-10 text-bold" color='#000' size={16} />
-                    <p>All</p>
-                </div>
+                <Link href={'./Allproduct'}>
+                    <div className='hidden bg-white text-bold border-r md:flex justify-center items-center px-3 gap-1 rounded-tl-md rounded-bl-md'>
+                        <AiOutlineMenu className="h-10 text-bold" color='#000' size={16} />
+                        <p>All</p>
+                    </div>
+                </Link>
+                
                 <input
                     onMouseOver={() => setShowResults(true)} 
                     onBlur={() => setShowResults(false)} 

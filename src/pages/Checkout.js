@@ -67,7 +67,7 @@ function Checkout() {
         </div>
 
         {/* Right  */}
-        <div className="shadow-md flex flex-col bg-white p-3 col-span-2 md:mt-3 my-5">
+        <div className="shadow-md flex flex-col bg-white p-10 rounded col-span-2 md:mt-3 my-4">
           <h2 className="text-2xl border-b pb-4 text-center mb-9">
             Subtotal ({ReduxBaskets.length} items)
           </h2>

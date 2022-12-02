@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import Currency from "react-currency-formatter";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, selectCarts, selectProducts } from "../slices/basketSlice";
+import { addToCart, addBookMarkProduct, selectBookMarks, selectCarts, cancelBookMarkProduct } from "../slices/basketSlice";
 import useAlertModelHook from "../useHook/useAlertModelHook";
 import ModelProduct from "./ModelProduct";
-const MAX_RATING = 5;
-const MIN_RATING = 1;
+import { BsFillBookmarkFill } from 'react-icons/bs';
+import { BsBookmark } from 'react-icons/bs';
 
 function ProductItem({
   id,
@@ -24,12 +24,14 @@ function ProductItem({
   totalPrice,
   quantity,
   shopping,
+  save
 }) {
   const [ismodel, setIsmodel] = useState(false);
   const [isproduct, setIsproduct] = useState(false);
+  const [bookmark, setBookmark] = useState(false);
   const dispatch = useDispatch();
   const ReduxCarts = useSelector(selectCarts);
-  const ReduxProducts = useSelector(selectProducts);
+  const ReduxBookMarks = useSelector(selectBookMarks);
   const { handelMessage } = useAlertModelHook();
 
 // cart function
@@ -64,6 +66,17 @@ function ProductItem({
       
     }
   };
+
+// Save product (BookMark)
+  const saveproduct = (data)=>{
+    if (data === "save") {
+      dispatch(addBookMarkProduct({id}))
+    }
+    if (data === "cancel") {
+      dispatch(cancelBookMarkProduct({id}))
+    }
+  }
+
 // is model 
   const Ismodelhandeler=()=>{
     setIsmodel(!ismodel)
@@ -77,16 +90,33 @@ function ProductItem({
     }
   }, [isproduct]);
 
+  // useEffect(() => {
+  //   const filterBookMarkData = ReduxBookMarks?.filter((item) => item.id === id);
+  //   if (!!filterBookMarkData.length) {
+  //     setBookmark(true)
+  //     return;
+  //   }else{
+  //     setBookmark(false)
+  //     return;
+  //   }
+  // }, [ReduxBookMarks]);
+
   return (
     <>
-      <div className="relative flex flex-col m-5 bg-white z-10 p-10 rounded-md justify-between">
+      <div className="relative flex flex-col m-5 bg-white z-10 p-10 rounded-md justify-between shadow">
         <p className="absolute top-2 right-2 text-xs italic text-gray-400">
           {category}
         </p>
         <Image src={image} height={200} width={200} objectFit="contain" onClick={()=>Ismodelhandeler()} className="cursor-pointer" />
 
         <div className="flex-grow">
-          <h4 className="my-3 capitalize underline cursor-pointer" onClick={(e)=> Ismodelhandeler()}>{name}</h4>
+          <div className="flex items-center justify-between">
+            <h4 className="my-3 capitalize underline cursor-pointer" onClick={(e)=> Ismodelhandeler()}>{name}</h4>
+            {
+              save ? <BsFillBookmarkFill onClick={() => saveproduct("cancel")} size={18} className="cursor-pointer"/> : <BsBookmark onClick={()=>saveproduct("save")} size={18} className="cursor-pointer"/>
+            }
+            
+          </div>
           <div className="flex items-center">
             {rating?.map((_, i) => <AiFillStar key={i} size={16} className="text-yellow-500" /> )}
             <p className="hover:underline cursor-pointer"> ({review} ratings)</p>

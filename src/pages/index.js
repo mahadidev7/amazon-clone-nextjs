@@ -71,7 +71,9 @@ export async function getServerSideProps(context){
       // add new quantity mathord for Products because is not available in API
       item.quantity=1,
       // add new shopping mathord for Products because is not available in API
-      item.shopping=false
+      item.shopping=false,
+      // add new product bookMark mathord for Products because is not available in API
+      item.save=false
     )
   })
 

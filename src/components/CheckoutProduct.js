@@ -30,10 +30,12 @@ function CheckoutProduct({
   const dispatch = useDispatch();
   const { handelMessage } = useAlertModelHook();
 
+// Add or Remove from the Payment area...
   const updatetocartshopping = (data)=>{
     dispatch(updateToCartshopping({ id, type: data }))
   }
 
+// Card product Quantity update...
   const quantityupdate = (data) => {
     if(data === "decrement" && quantity === 1){
       handelMessage({
@@ -46,6 +48,7 @@ function CheckoutProduct({
     dispatch(updateToCartQuantity({ id, type: data }));
   };
 
+// Remove from cart
   const removefromcart = () => {
       handelMessage({
         image,

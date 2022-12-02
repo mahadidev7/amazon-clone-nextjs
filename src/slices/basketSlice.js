@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   products: [],
   carts:[],
+  bookmarks:[],
 };
 
 export const basketSlice = createSlice({
@@ -34,16 +35,16 @@ export const basketSlice = createSlice({
     updateToCartshopping: (state, action) => {
       if(action.payload.type === "true"){
         const filterCartData = state.carts.find((item) => item.id === action.payload.id);
-        filterCartData.shopping = filterCartData.shopping = true
+        filterCartData.shopping = true
       }
       if(action.payload.type === "false"){
         const filterCartData = state.carts.find((item) => item.id === action.payload.id);
-        filterCartData.shopping = filterCartData.shopping = false
+        filterCartData.shopping = false
       }
     },
 
     removeFromCart: (state, action) => {
-    const index = state.carts.findIndex((cartItem)=> cartItem.id === action.payload.id )
+    const index = state.carts.findIndex((cart)=> cart.id === action.payload.id )
      const newCart = [...state.carts]
       if(index >= 0) {
         // The item exists in the basket... remove it from the basket
@@ -54,14 +55,25 @@ export const basketSlice = createSlice({
       state.carts = newCart;
     },
 
+    addBookMarkProduct: (state, action) => {
+        const Data = state.products.find((item) => item.id === action.payload.id);
+        Data.save = true
+    },
+
+    cancelBookMarkProduct: (state, action) => {
+      const Data = state.products.find((item) => item.id === action.payload.id);
+      Data.save = false
+    },
+
   },
 });
 
 //Global action slice function
-export const { addToProduct, addToCart, updateToCartQuantity, removeFromCart, updateToCartshopping } = basketSlice.actions;
+export const { addToProduct, addToCart, updateToCartQuantity, removeFromCart, updateToCartshopping, addBookMarkProduct, cancelBookMarkProduct } = basketSlice.actions;
 
 // Selectors - This is a Global State object
 export const selectProducts = (state) => state.basket.products;
 export const selectCarts = (state) => state.basket.carts;
+export const selectBookMarks = (state) => state.basket.bookmarks;
 
 export default basketSlice.reducer;
