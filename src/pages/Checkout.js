@@ -20,8 +20,9 @@ function Checkout() {
   const sliceServer = useSelector(selectServer);
   const { data: session } = useSession();
   const ReduxTotalPrice = ReduxBaskets?.reduce((total, item)=> total + item.totalPrice, 0 )
+
   const proceedhandeler = () => {
-    alert("123");
+    // alert("123");
   };
 
   useEffect(() => {

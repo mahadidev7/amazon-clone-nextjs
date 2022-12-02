@@ -13,7 +13,6 @@ import useAlertModelHook from "../useHook/useAlertModelHook";
 
 export default function Home({products}) {
   const dispatch = useDispatch()
-  const {isAlert} = useAlertModelHook()
   const sliceServer = useSelector(selectServer)
 
   useEffect(() => {

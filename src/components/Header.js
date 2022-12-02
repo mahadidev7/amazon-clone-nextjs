@@ -38,9 +38,7 @@ const Header = () => {
         let trem = e.target.value
         trem = trem.toLowerCase()
         setSearchTerm(trem)
-
         setSearchResults(ReduxProducts?.filter(product => product.name.includes(trem) || product.category.includes(trem) || product.company.includes(trem)))
-        
     }
     
 
@@ -62,12 +60,12 @@ const Header = () => {
 
             {/* Search  */}
             <div className='hidden relative sm:flex items-center h-10 cursor-pointer rounded-md flex-grow bg-white'>
-                <Link href={'./Allproduct'}>
+                {/* <Link href={'./Allproduct'}> */}
                     <div className='hidden bg-white text-bold border-r md:flex justify-center items-center px-3 gap-1 rounded-tl-md rounded-bl-md'>
                         <AiOutlineMenu className="h-10 text-bold" color='#000' size={16} />
                         <p>All</p>
                     </div>
-                </Link>
+                {/* </Link> */}
                 
                 <input
                     onMouseOver={() => setShowResults(true)} 

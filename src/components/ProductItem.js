@@ -90,16 +90,6 @@ function ProductItem({
     }
   }, [isproduct]);
 
-  // useEffect(() => {
-  //   const filterBookMarkData = ReduxBookMarks?.filter((item) => item.id === id);
-  //   if (!!filterBookMarkData.length) {
-  //     setBookmark(true)
-  //     return;
-  //   }else{
-  //     setBookmark(false)
-  //     return;
-  //   }
-  // }, [ReduxBookMarks]);
 
   return (
     <>
