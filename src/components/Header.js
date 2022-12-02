@@ -60,12 +60,12 @@ const Header = () => {
 
             {/* Search  */}
             <div className='hidden relative sm:flex items-center h-10 cursor-pointer rounded-md flex-grow bg-white'>
-                {/* <Link href={'./Allproduct'}> */}
+                <Link href={'./Allproduct'}>
                     <div className='hidden bg-white text-bold border-r md:flex justify-center items-center px-3 gap-1 rounded-tl-md rounded-bl-md'>
                         <AiOutlineMenu className="h-10 text-bold" color='#000' size={16} />
                         <p>All</p>
                     </div>
-                {/* </Link> */}
+                </Link>
                 
                 <input
                     onMouseOver={() => setShowResults(true)} 
@@ -82,20 +82,16 @@ const Header = () => {
                 {showResults && (
                         <div onClick={() => setShowResults(true)} onMouseOver={() => setShowResults(true)} onMouseLeave={() => setShowResults(false)} className="absolute w-full bg-white bottom-0 z-40 rounded-md" style={{ transform: 'translateY(100%)', height: 'auto', maxHeight: '400px', overflowY: 'auto' }}>
                             {(!!searchResults?.length) ? searchResults?.map(({id, name, price, category}) => (
-                                <Link href={`/product/${id}`} key={Math.random()} className="cursor-pointer">
-                                    <div className="p-2 mt-2 border-b-2 rounded-md border-gray-100 bg-gray-50 flex justify-between items-center">
-                                        
-                                        <div>
-                                            <h5 className="font-medium text-sm text-gray-600">{name}</h5>
-                                            <p className="text-xs text-gray-400">{category} </p>
-                                        </div>
-                                        <div className='flex justify-between items-center text-sm text-gray-600'>
-                                            <Currency quantity={price} currency="GBP" />
-                                        </div>
-
-
+                                <div className="p-2 mt-2 border-b-2 rounded-md border-gray-100 bg-gray-50 flex justify-between items-center">
+                                    
+                                    <div>
+                                        <h5 className="font-medium text-sm text-gray-600">{name}</h5>
+                                        <p className="text-xs text-gray-400">{category} </p>
                                     </div>
-                                </Link>
+                                    <div className='flex justify-between items-center text-sm text-gray-600'>
+                                        <Currency quantity={price} currency="GBP" />
+                                    </div>
+                                </div>
                             )) : (
                                 <>
                                     {searchTerm && <p className="text-xs text-gray-400 p-2">No product found</p>}
