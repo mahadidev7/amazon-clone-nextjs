@@ -14,6 +14,7 @@ FETURES: <br/>
     -CHACKOUT PAGE FETURE: (./Checkout)
         * Product Delete feture
         * Add to Basket Button
+        * product quantity increment and decrement
 
     -ALL PRODUCTS PAGE FETURE: (./Allproduct)
         * filter by catagorys
