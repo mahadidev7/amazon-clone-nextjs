@@ -14,6 +14,7 @@ FETURES: <br/>
     -CHACKOUT PAGE FETURE: (./Checkout)
         * Product Delete feture
         * Add to Basket Button
+        * product quantity increment and decrement
 
     -ALL PRODUCTS PAGE FETURE: (./Allproduct)
         * filter by catagorys
@@ -31,4 +32,4 @@ FETURES: <br/>
 <br/>
 <br/>
 <br/>
-This project url:  https://amazon-clone-nextjs-3hknzkve8-mahadidev7.vercel.app/
+This project url: https://amazon-clone-nextjs-xi-seven.vercel.app/
