@@ -31,4 +31,4 @@ FETURES: <br/>
 <br/>
 <br/>
 <br/>
-This project url:  https://amazon-clone-nextjs-3hknzkve8-mahadidev7.vercel.app/
+This project url: https://amazon-clone-nextjs-xi-seven.vercel.app/
