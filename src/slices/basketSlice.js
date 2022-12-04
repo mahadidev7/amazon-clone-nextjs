@@ -2,8 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
-  carts:[],
-  bookmarks:[],
 };
 
 export const basketSlice = createSlice({
@@ -16,43 +14,46 @@ export const basketSlice = createSlice({
     },
 
     addToCart: (state, action) => {
-      state.carts = [...state.carts, action.payload]
+      const result = state.products.find((item) => item.id === action.payload.id);
+      result.cart = true
     },
 
     updateToCartQuantity: (state, action) => {
       if(action.payload.type === "increment"){
-        const filterCartData = state.carts.find((item) => item.id === action.payload.id);
-        filterCartData.totalPrice = filterCartData.totalPrice + filterCartData.price,
-        filterCartData.quantity = filterCartData.quantity + 1
+        const result = state.products.find((item) => item.id === action.payload.id);
+        result.totalPrice = result.totalPrice + result.price,
+        result.quantity = result.quantity + 1
       }
       if(action.payload.type === "decrement"){
-        const filterCartData = state.carts.find((item) => item.id === action.payload.id);
-        filterCartData.totalPrice = filterCartData.totalPrice - filterCartData.price,
-        filterCartData.quantity = filterCartData.quantity - 1
+        const result = state.products.find((item) => item.id === action.payload.id);
+        result.totalPrice = result.totalPrice - result.price,
+        result.quantity = result.quantity - 1
       }
     },
 
     updateToCartshopping: (state, action) => {
       if(action.payload.type === "true"){
-        const filterCartData = state.carts.find((item) => item.id === action.payload.id);
-        filterCartData.shopping = true
+        const result = state.products.find((item) => item.id === action.payload.id);
+        result.shipping = true
       }
       if(action.payload.type === "false"){
-        const filterCartData = state.carts.find((item) => item.id === action.payload.id);
-        filterCartData.shopping = false
+        const result = state.products.find((item) => item.id === action.payload.id);
+        result.shipping = false
       }
     },
 
     removeFromCart: (state, action) => {
-    const index = state.carts.findIndex((cart)=> cart.id === action.payload.id )
-     const newCart = [...state.carts]
-      if(index >= 0) {
-        // The item exists in the basket... remove it from the basket
-        newCart.splice(index, 1);
-      }else{
-        console.warn(`can not remove product (id: ${action.payload.id}) from cart`)
-      }
-      state.carts = newCart;
+    const result = state.products.find((cart)=> cart.id === action.payload.id )
+    result.cart = false;
+    //  const newCart = [...state.products]
+      // if(index >= 0) {
+      //   The item exists in the basket... remove it from the basket
+      //   newCart.splice(index, 1);
+        
+      // }else{
+      //   console.warn(`can not remove product (id: ${action.payload.id}) from cart`)
+      // }
+      // state.carts = newCart;
     },
 
     addBookMarkProduct: (state, action) => {

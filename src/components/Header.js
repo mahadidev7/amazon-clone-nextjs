@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineShoppingCart } from 'react-icons/ai';
@@ -14,9 +14,9 @@ const Header = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [searchResults, setSearchResults] = useState([])
     const [showResults, setShowResults] = useState(true)
+    const [basketLength, setBasketLength] = useState(0)
     const router = useRouter()
     const ReduxProducts = useSelector(selectProducts);
-    const ReduxCarts = useSelector(selectCarts)
     const {data: session} = useSession()
     const { handelMessage } = useAlertModelHook();
 
@@ -41,6 +41,9 @@ const Header = () => {
         setSearchResults(ReduxProducts?.filter(product => product.name.includes(trem) || product.category.includes(trem) || product.company.includes(trem)))
     }
     
+    useEffect(() => {
+        setBasketLength(ReduxProducts.filter((item) => item.cart === true))
+    }, [ReduxProducts]);
 
   return (
     <header id='sticky'>
@@ -120,7 +123,7 @@ const Header = () => {
                         className='relative link flex items-center' 
                         onClick={()=> router.push("/Checkout")}
                     >
-                        <span className='absolute top-0 left-6 h-5 w-5 bg-yellow-400 flex items-center justify-center rounded-full text-black font-bold'>{ReduxCarts.length}</span>
+                        <span className='absolute top-0 left-6 h-5 w-5 bg-yellow-400 flex items-center justify-center rounded-full text-black font-bold'>{basketLength.length}</span>
                         <AiOutlineShoppingCart size={30} />
                         <p className='hidden md:inline font-extrabold md:text-sm mt-4'>Basket</p> 
                     </div>

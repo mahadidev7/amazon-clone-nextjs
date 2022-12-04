@@ -25,7 +25,8 @@ function CheckoutProduct({
   hasPrime,
   totalPrice,
   quantity,
-  shopping
+  shipping,
+  save
 }) {
   const dispatch = useDispatch();
   const { handelMessage } = useAlertModelHook();
@@ -105,7 +106,7 @@ function CheckoutProduct({
           <buttom className="col-span-1 bg-gray-300 active:border active:border-gray-500 border py-1 rounded text-center text-xl cursor-pointer" onClick={()=> quantityupdate("increment")}>+</buttom>
         </div>
 
-          {shopping ? (
+          {shipping ? (
             <button className="button" onClick={()=> updatetocartshopping("false")}>
               Remove from Basket
             </button>

@@ -31,9 +31,7 @@ function Allproduct() {
             setProducts(ReduxProducts?.filter(product => product.name.includes(trem) || product.category.includes(trem) || product.company.includes(trem)))
             setselectCatagory('')
         }
-
-
-        
+  
     }
 
     const catagoryHandlar = (data)=> {

@@ -24,44 +24,25 @@ function ProductItem({
   totalPrice,
   quantity,
   shopping,
+  cart,
   save
 }) {
   const [ismodel, setIsmodel] = useState(false);
   const [isproduct, setIsproduct] = useState(false);
-  const [bookmark, setBookmark] = useState(false);
   const dispatch = useDispatch();
   const ReduxCarts = useSelector(selectCarts);
-  const ReduxBookMarks = useSelector(selectBookMarks);
   const { handelMessage } = useAlertModelHook();
 
 // cart function
   const handelBasket = (id) => {
     
-    const product = {
-      id,
-      name,
-      price,
-      description,
-      category,
-      image,
-      colors,
-      company,
-      rating,
-      review,
-      hasPrime,
-      totalPrice,
-      quantity,
-      shopping,
-    }
-
-    if (isproduct) {
+    if (cart) {
       // alert("Product already added")
       handelMessage({ server: 400, message: "Product Already Added to Basket" });
       return;
     } else {
-      setIsproduct(true)
       // SENDING THE PRODUCT AS AN ACTION TO THE REDUX STORE ...... THE CARTS OF BASKET SLICE
-      dispatch(addToCart(product));
+      dispatch(addToCart({id}));
       handelMessage({image, server: 200, message: `${name} - This Product added to Basket ` });
       
     }
@@ -81,15 +62,6 @@ function ProductItem({
   const Ismodelhandeler=()=>{
     setIsmodel(!ismodel)
   }
-
-  useEffect(() => {
-    const filterCartData = ReduxCarts.filter((item) => item.id === id);
-    if (!!filterCartData.length) {
-      setIsproduct(true)
-      return;
-    }
-  }, [isproduct]);
-
 
   return (
     <>
@@ -129,18 +101,18 @@ function ProductItem({
             </div>
           )}
           <button
-            disabled={isproduct}
-            className={`mt-auto w-full mb:text-sm  ${isproduct ? 'bg-gray-300 rounded p-1 text-black cursor-not-allowed' : 'button'}`}
+            disabled={cart}
+            className={`mt-auto w-full mb:text-sm  ${cart ? 'bg-gray-300 rounded p-1 text-black cursor-not-allowed' : 'button'}`}
             onClick={() => handelBasket(id)}
           >
-          {isproduct ? "Added to Basket" : 'Add to Basket' }
+          {cart ? "Added to Basket" : 'Add to Basket' }
             
           </button>
         </div>
       </div>
 
       {/* MODEL  */}
-      {ismodel && <ModelProduct image={image} handelBasket={handelBasket} Ismodelhandeler={Ismodelhandeler} id={id} name={name} price={price} colors={colors} company={company} review={review} isproduct={isproduct} /> }
+      {ismodel && <ModelProduct image={image} handelBasket={handelBasket} Ismodelhandeler={Ismodelhandeler} id={id} name={name} price={price} colors={colors} company={company} review={review} isproduct={cart} /> }
       
     </>
   );

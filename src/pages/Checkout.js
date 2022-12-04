@@ -7,6 +7,7 @@ import CustomModel from "../components/CustomModel";
 import Header from "../components/Header";
 import {
   selectCarts,
+  selectProducts
 } from "../slices/basketSlice";
 import { selectServer } from "../slices/mahadiSlice";
 import { useSession } from "next-auth/react";
@@ -14,8 +15,9 @@ import BackToTop from "../components/BackToTop";
 import Footer from "../components/Footer";
 
 function Checkout() {
-  // const ReduxBaskets = useSelector(selectBaskets);
-  const ReduxCarts = useSelector(selectCarts);
+  const ReduxProducts = useSelector(selectProducts);
+  // const ReduxCarts = useSelector(selectCarts);
+  const [ReduxCarts, setReduxCarts] = useState([]);
   const [ReduxBaskets, setReduxBaskets] = useState([]);
   const sliceServer = useSelector(selectServer);
   const { data: session } = useSession();
@@ -26,8 +28,9 @@ function Checkout() {
   };
 
   useEffect(() => {
-    setReduxBaskets(ReduxCarts.filter((item) => item.shopping === true))
-  }, [ReduxCarts]);
+    setReduxCarts(ReduxProducts.filter((item) => item.cart === true))
+    setReduxBaskets(ReduxCarts.filter((item) => item.shipping === true))
+  }, [ReduxCarts, ReduxProducts]);
 
   return (
     <div className="bg-gray-100">
@@ -70,7 +73,7 @@ function Checkout() {
         {/* Right  */}
         <div className="shadow-md flex flex-col bg-white p-10 rounded col-span-2 md:mt-3 my-4">
           <h2 className="text-2xl border-b pb-4 text-center mb-9">
-            Subtotal ({ReduxBaskets.length} items)
+            Subtotal 5 items)
           </h2>
 
           {ReduxBaskets?.map((v, i) => {
