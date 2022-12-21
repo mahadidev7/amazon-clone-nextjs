@@ -78,7 +78,7 @@ function Allproduct() {
         <main className="max-w-screen-2xl mx-auto ">
             <div className="grid md:grid-cols-3 grid-cols-1 gap-2 py-9 ">
                 {/* left  */}
-                    <LeftSide catagorys={catagorys} selectCatagory={selectCatagory} catagoryHandlar={catagoryHandlar}  />
+                    <LeftSide catagorys={catagorys} selectCatagory={selectCatagory} catagoryHandlar={catagoryHandlar} ReduxProducts={ReduxProducts}  />
                 {/* right */}
                     <RightSide products={products} handleSearch={handleSearch} searchTerm={searchTerm} />
             </div>
