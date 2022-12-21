@@ -43,7 +43,7 @@ function Footer() {
                     <a className="mb-1 hover:underline" target="__blank" href="https://mahadidev7-portfolio.web.app/">About Amazon</a>
                 </div>
             </div>
-            <div className='mt-10 flex justify-between pt-5 pb-10'>
+            <div className='mt-10 flex justify-between gap-4 pt-5 pb-10'>
                 <Image
                     src= "https://links.papareact.com/f90"
                     width={150}
@@ -51,7 +51,7 @@ function Footer() {
                     objectFit="contain"
                     className='cursor-pointer'
                 />
-                <p className='text-sm'>This is a Portfolio Demo Website. create by <a className='underline bg-[#090d11] p-2 rounded' target="__blank" href="https://mahadidev7-portfolio.web.app/">Mahadidev7</a></p>
+                <p className='text-sm'>This is a Portfolio Demo Website. create by <a className='underline bg-[#090d11] p-2 rounded inline-block ' target="__blank" href="https://mahadidev7-portfolio.web.app/">Mahadidev7</a></p>
             </div>
         </div>
         

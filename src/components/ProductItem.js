@@ -79,8 +79,8 @@ function ProductItem({
     <>
       <div
         className={`relative ${
-          designCommend === "cols" ? "flex flex-col" : "grid grid-cols-2"
-        } m-5 bg-white z-10 p-10 rounded-md justify-between shadow`}
+          designCommend === "cols" ? "flex flex-col" : "grid grid-cols-2 gap-6"
+        } bg-white z-10 p-10 rounded-md justify-between shadow`}
       >
         <p className="absolute top-2 right-2 text-xs italic text-gray-400">
           {category}

@@ -4,15 +4,15 @@ import { BsSearch, BsGrid3X3Gap } from "react-icons/bs";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import Image from "next/image";
 
-function RightSide({ products, handleSearch, searchTerm }) {
+function RightSide({ products, handleSearch, searchTerm, SortProduct }) {
   const [showResults, setShowResults] = useState(true);
-  const [designCommend, setDesignCommend] = useState('rows');
+  const [designCommend, setDesignCommend] = useState('cols');
 
   return (
-    <div className="md:col-span-2 col-span-1">
+    <div className="md:col-span-3 col-span-1 px-1">
       {/* filtter area  */}
-      <div className="grid grid-cols-3 justify-between items-center">
-        <div className="col-span-2 flex items-center cursor-pointer rounded-md flex-grow bg-white md:ml-5 ml-2">
+      <div className="flex md:flex-row flex-col justify-between items-center gap-3 w-full px-2 md:px-0">
+        <div className="flex items-center cursor-pointer rounded-md flex-grow bg-white border w-full">
           <input
             onMouseOver={() => setShowResults(true)}
             onBlur={() => setShowResults(false)}
@@ -20,7 +20,7 @@ function RightSide({ products, handleSearch, searchTerm }) {
             value={searchTerm}
             onChange={handleSearch}
             type="text"
-            className="p-4 h-full w-6 flex-grow flex-shrink  focus:outline-none px-4 rounded"
+            className="p-4 h-full w-full flex-grow flex-shrink focus:outline-none px-4 rounded-md"
             placeholder="Search...."
           />
           <BsSearch
@@ -29,7 +29,7 @@ function RightSide({ products, handleSearch, searchTerm }) {
             size={60}
           />
         </div>
-        <div className="bg-white flex items-center justify-between p-2 rounded-md md:mx-5 mx-2">
+        <div className="bg-white flex  items-center justify-between p-2 rounded-md border w-full">
             <div className="flex">
               <BsGrid3X3Gap
                 className={`p-2 text-bold mr-1 ${designCommend === 'cols'? 'bg-yellow-400' : 'bg-white' } hover:bg-yellow-400 rounded-md cursor-pointer `}
@@ -44,20 +44,20 @@ function RightSide({ products, handleSearch, searchTerm }) {
                 onClick={()=> setDesignCommend('rows')}
               />
             </div>
-            <select className="border rounded-md p-2 cursor-pointer">
-              <option value={1}>Price(Lowest)</option>
-              <option value={1}>Price(Hight)</option>
-              <option value={1}>Name(a-z)</option>
-              <option value={1}>Name(z-a)</option>
+            <select className="border rounded-md p-2 cursor-pointer" onChange={(e)=> SortProduct(e)}>
+              <option value={"priceLow"}>Price(Lowest)</option>
+              <option value={"priceHigh"}>Price(Hight)</option>
+              <option value={"nameNormal"}>Name(a-z)</option>
+              <option value={"nameObverse"}>Name(z-a)</option>
             </select>
         </div>
       </div>
 
-      <div className=" md:mx-5 mx-2 mt-3">
-        <p className="text-gray-400">{products.length} Products Found</p>
+      <div className="my-3">
+        <p className="text-gray-400">{products.length} Products Found </p>
       </div>
 
-      <div className={` grid ${designCommend === 'cols' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1' }  mx-auto bg-gray-50`}>
+      <div className={` grid ${designCommend === 'cols' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1' }  mx-auto bg-gray-50 gap-2`}>
         {products?.map((product, key) => (
           <ProductItem key={key} {...product} designCommend={designCommend} />
         ))}

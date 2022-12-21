@@ -18,6 +18,13 @@ function Allproduct() {
     const ReduxProducts = useSelector(selectProducts);
     const sliceServer = useSelector(selectServer)
 
+    // product Sorting with selector
+    const SortProduct = (e) => {
+        const newProducts = products.reverse()
+        // setProducts(newProducts)
+    
+    }
+
 // Search handler...
     const handleSearch = e => {
         let trem = e.target.value
@@ -76,11 +83,11 @@ function Allproduct() {
             <p className='text-yellow-500'>All Product</p>
         </div>
         <main className="max-w-screen-2xl mx-auto ">
-            <div className="grid md:grid-cols-3 grid-cols-1 gap-2 py-9 ">
+            <div className="grid md:grid-cols-4 grid-cols-1 gap-1 py-9 ">
                 {/* left  */}
                     <LeftSide catagorys={catagorys} selectCatagory={selectCatagory} catagoryHandlar={catagoryHandlar} ReduxProducts={ReduxProducts}  />
                 {/* right */}
-                    <RightSide products={products} handleSearch={handleSearch} searchTerm={searchTerm} />
+                    <RightSide products={products} handleSearch={handleSearch} searchTerm={searchTerm} SortProduct={SortProduct} />
             </div>
         </main>
         {/* footer start  */}

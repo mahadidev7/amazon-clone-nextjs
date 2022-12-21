@@ -54,7 +54,16 @@ html {
 }
 #productSticky{
     position: sticky;
-    top: 150px;
+    top: 120px;
     left: 0;
     height: 550px;
+}
+
+@media only screen and (max-width: 767px){
+  #productSticky{
+    position: unset;
+    top: unset;
+    left: unset;
+    height: auto;
+  }
 }
