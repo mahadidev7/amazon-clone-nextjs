@@ -19,6 +19,7 @@ FETURES: <br/>
     -ALL PRODUCTS PAGE FETURE: (./Allproduct)
         * filter by catagorys
         * filter by search
+        * filter bt sort [ name(a-z), name(z-a), price(a-z), price(z-a) ]
         * when have selected the BOOKMARK category and searched for the product, then  bookmark save search results will be displayed
 
     -OTHER FETURE:
