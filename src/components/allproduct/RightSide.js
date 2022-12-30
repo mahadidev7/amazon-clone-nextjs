@@ -6,7 +6,7 @@ import Image from "next/image";
 
 function RightSide({ products, handleSearch, searchTerm, SortProduct }) {
   const [showResults, setShowResults] = useState(true);
-  const [designCommend, setDesignCommend] = useState('cols');
+  const [designCommend, setDesignCommend] = useState("cols");
 
   return (
     <div className="md:col-span-3 col-span-1 px-1">
@@ -30,26 +30,33 @@ function RightSide({ products, handleSearch, searchTerm, SortProduct }) {
           />
         </div>
         <div className="bg-white flex  items-center justify-between p-2 rounded-md border w-full">
-            <div className="flex">
-              <BsGrid3X3Gap
-                className={`p-2 text-bold mr-1 ${designCommend === 'cols'? 'bg-yellow-400' : 'bg-white' } hover:bg-yellow-400 rounded-md cursor-pointer `}
-                color="#000"
-                size={40}
-                onClick={()=> setDesignCommend('cols')}
-              />
-              <AiOutlineMenu 
-                className={`p-2 text-bold mr-1 ${designCommend === 'rows'? 'bg-yellow-400' : 'bg-white' }  hover:bg-yellow-500 rounded-md cursor-pointer`} 
-                color="#000" 
-                size={40}
-                onClick={()=> setDesignCommend('rows')}
-              />
-            </div>
-            <select className="border rounded-md p-2 cursor-pointer" onChange={(e)=> SortProduct(e)}>
-              <option value={"priceLow"}>Price(Lowest)</option>
-              <option value={"priceHigh"}>Price(Hight)</option>
-              <option value={"nameNormal"}>Name(a-z)</option>
-              <option value={"nameObverse"}>Name(z-a)</option>
-            </select>
+          <div className="flex">
+            <BsGrid3X3Gap
+              className={`p-2 text-bold mr-1 ${
+                designCommend === "cols" ? "bg-yellow-400" : "bg-white"
+              } hover:bg-yellow-500 rounded-md cursor-pointer `}
+              color="#000"
+              size={40}
+              onClick={() => setDesignCommend("cols")}
+            />
+            <AiOutlineMenu
+              className={`p-2 text-bold mr-1 ${
+                designCommend === "rows" ? "bg-yellow-400" : "bg-white"
+              }  hover:bg-yellow-500 rounded-md cursor-pointer`}
+              color="#000"
+              size={40}
+              onClick={() => setDesignCommend("rows")}
+            />
+          </div>
+          <select
+            className="border rounded-md p-2 cursor-pointer"
+            onChange={(e) => SortProduct(e)}
+          >
+            <option value={"az"}>Name(a-z)</option>
+            <option value={"za"}>Name(z-a)</option>
+            <option value={"plow"}>Price(Lowest)</option>
+            <option value={"pHigh"}>Price(Hight)</option>
+          </select>
         </div>
       </div>
 
@@ -57,7 +64,13 @@ function RightSide({ products, handleSearch, searchTerm, SortProduct }) {
         <p className="text-gray-400">{products.length} Products Found </p>
       </div>
 
-      <div className={` grid ${designCommend === 'cols' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1' }  mx-auto bg-gray-50 gap-2`}>
+      <div
+        className={` grid ${
+          designCommend === "cols"
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            : "grid-cols-1"
+        }  mx-auto bg-gray-50 gap-2`}
+      >
         {products?.map((product, key) => (
           <ProductItem key={key} {...product} designCommend={designCommend} />
         ))}
