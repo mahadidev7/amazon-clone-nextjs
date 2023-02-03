@@ -31,6 +31,8 @@ function ModelProduct({id,image,Ismodelhandeler,handelBasket, name, price, color
     //     }
     // }
 
+    const notImg = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
+
   return (
     <div className="informationModel z-20 flex items-center justify-center" >
           <div className="w-5/6 h-5/6 bg-white mx-auto p-4 overflow-y-auto rounded-md">
@@ -48,7 +50,7 @@ function ModelProduct({id,image,Ismodelhandeler,handelBasket, name, price, color
                 <div className="flex !flex-wrap gap-2 p-2 overflow-hidden h-1/6 border">
                   <img
                     loading="lazy"
-                    src={image}
+                    src={image || notImg}
                     onClick={()=>setProductImg(image)}
                     alt="product image"
                       className="w-14 h-14 border-2 border-black object-fill rounded cursor-pointer"
@@ -58,7 +60,7 @@ function ModelProduct({id,image,Ismodelhandeler,handelBasket, name, price, color
                     <img
                       loading="lazy"
                       key={i}
-                      src={image}
+                      src={image || notImg}
                       onClick={()=>setProductImg(image)}
                       alt="product image"
                       className="w-14 h-14 border-2 border-black object-fill rounded cursor-pointer"

@@ -75,6 +75,8 @@ function ProductItem({
     setIsmodel(!ismodel);
   };
 
+  const notImg = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
+
   return (
     <>
       <div
@@ -86,7 +88,7 @@ function ProductItem({
           {category}
         </p>
         <Image
-          src={image}
+          src={image || notImg}
           height={200}
           width={200}
           objectFit="contain"
