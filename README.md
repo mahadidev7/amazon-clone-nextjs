@@ -19,7 +19,7 @@ FETURES: <br/>
     -ALL PRODUCTS PAGE FEATURE: (./Allproduct)
     * filter by catagorys
     * filter by search
-    * filter bt sort [ name(a-z), name(z-a), price(a-z), price(z-a) ]
+    * filter by sort [ name(a-z), name(z-a), price(a-z), price(z-a) ]
     * When have selected the BOOKMARK category and searched for the product, then  bookmark save search results will be displayed
 
     -OTHER FEATURES:
