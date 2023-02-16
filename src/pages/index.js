@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BackToTop from "../components/BackToTop";
 import Banner from "../components/Banner";
@@ -9,79 +9,79 @@ import Header from "../components/Header";
 import ProductFeed from "../components/ProductFeed";
 import { addToProduct } from "../slices/basketSlice";
 import { selectServer } from "../slices/mahadiSlice";
-import useAlertModelHook from "../useHook/useAlertModelHook";
 
-export default function Home({products}) {
-  const dispatch = useDispatch()
-  const sliceServer = useSelector(selectServer)
+export default function Home({ products }) {
+  const dispatch = useDispatch();
+  const sliceServer = useSelector(selectServer);
 
   useEffect(() => {
-    dispatch(addToProduct(products))
+    dispatch(addToProduct(products));
   }, [products]);
-  
+
   return (
     <div className="bg-gray-100 relative">
       <Head>
         <title>Amazon 2.0</title>
       </Head>
 
-    {/* Header start */}
+      {/* Header start */}
       <Header />
-    {/* Header end */}
+      {/* Header end */}
 
-    {/* main start */}
+      {/* main start */}
       <main className="max-w-screen-2xl mx-auto">
-          {/* Banner  */}
-          <Banner />
-          {/* ProductFeed  */}
-          <ProductFeed />
+        {/* Banner  */}
+        <Banner />
+        {/* ProductFeed  */}
+        <ProductFeed />
       </main>
-    {/* main end */}
+      {/* main end */}
 
-    {/* footer start  */}
+      {/* footer start  */}
       <footer>
         <BackToTop />
         <Footer />
       </footer>
-    {/* footer end  */}
+      {/* footer end  */}
 
-    {/* alert Model area start */}
-      { sliceServer === 0 ? '' : <CustomModel /> }
-    {/* alert Model area end */}
+      {/* alert Model area start */}
+      {sliceServer === 0 ? "" : <CustomModel />}
+      {/* alert Model area end */}
     </div>
   );
 }
 
-export async function getServerSideProps(context){
-  const products = await fetch("https://course-api.com/react-store-products").then(
-    (res)=> res.json()
-  );
+export async function getServerSideProps(context) {
+  const products = await fetch(
+    "https://course-api.com/react-store-products"
+  ).then((res) => res.json());
 
-  products?.map(item => {
+  products?.map((item) => {
     return (
       // add new rating mathord for Products because is not available in API
-      item.rating=Array(Math.floor(Math.random() * (5 - 1 + 1)) + 1)?.fill(1),
+      (item.rating = Array(Math.floor(Math.random() * (5 - 1 + 1)) + 1)?.fill(
+        1
+      )),
       // add new review mathord for Products because is not available in API
-      item.review=Math.floor(Math.random() * 200),
+      (item.review = Math.floor(Math.random() * 200)),
       // add new hasPrime mathord for Products because is not available in API
-      item.hasPrime=Math.random() < 0.5,
+      (item.hasPrime = Math.random() < 0.5),
       // add new totalPrice mathord for Products because is not available in API
-      item.totalPrice= item.price,
+      (item.totalPrice = item.price),
       // add new quantity mathord for Products because is not available in API
-      item.quantity=1,
+      (item.quantity = 1),
       // add new product to cart for Products because is not available in API
-      item.cart=false,
+      (item.cart = false),
       // add new product bookMark mathord for Products because is not available in API
-      item.save=false,
+      (item.save = false),
       // add new product shopping mathord default false
-      item.shipping= false
-      
-    )
-  })
+      (item.shipping = false)
+    );
+  });
 
   return {
     props: {
       products,
-    }
-  }
+    },
+  };
 }

@@ -14,6 +14,7 @@ import useAlertModelHook from "../useHook/useAlertModelHook";
 import ModelProduct from "./ModelProduct";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { BsBookmark } from "react-icons/bs";
+import Button from "./share/Button";
 
 function ProductItem({
   id,
@@ -75,7 +76,8 @@ function ProductItem({
     setIsmodel(!ismodel);
   };
 
-  const notImg = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
+  const notImg =
+    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80";
 
   return (
     <>
@@ -145,17 +147,17 @@ function ProductItem({
             ) : (
               <div className="mt-16"></div>
             )}
-            <button
-              disabled={cart}
-              className={`mt-auto w-full mb:text-sm  ${
+            <Button
+              isDisabled={cart}
+              product_ID={id}
+              CLASS_NAME={
                 cart
                   ? "bg-gray-300 rounded p-1 text-black cursor-not-allowed"
                   : "button"
-              }`}
-              onClick={() => handelBasket(id)}
-            >
-              {cart ? "Added to Basket" : "Add to Basket"}
-            </button>
+              }
+              handelClick={() => handelBasket(id)}
+              TEXT={cart ? "Added to Basket" : "Add to Basket"}
+            />
           </div>
         </div>
       </div>

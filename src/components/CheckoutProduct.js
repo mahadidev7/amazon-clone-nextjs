@@ -10,6 +10,7 @@ import {
   updateToCartshopping,
 } from "../slices/basketSlice";
 import useAlertModelHook from "../useHook/useAlertModelHook";
+import Button from "./share/Button";
 
 function CheckoutProduct({
   id,
@@ -26,41 +27,41 @@ function CheckoutProduct({
   totalPrice,
   quantity,
   shipping,
-  save
+  save,
 }) {
   const dispatch = useDispatch();
   const { handelMessage } = useAlertModelHook();
 
-// Add or Remove from the Payment area...
-  const updatetocartshopping = (data)=>{
-    dispatch(updateToCartshopping({ id, type: data }))
-  }
+  // Add or Remove from the Payment area...
+  const updatetocartshopping = (data) => {
+    dispatch(updateToCartshopping({ id, type: data }));
+  };
 
-// Card product Quantity update...
+  // Card product Quantity update...
   const quantityupdate = (data) => {
-    if(data === "decrement" && quantity === 1){
+    if (data === "decrement" && quantity === 1) {
       handelMessage({
         image,
         server: 400,
         message: `the product cannot decrement. if you want to delete please click the Delete button`,
       });
-       return
+      return;
     }
     dispatch(updateToCartQuantity({ id, type: data }));
   };
 
-// Remove from cart
+  // Remove from cart
   const removefromcart = () => {
-      handelMessage({
-        image,
-        server: 400,
-        message: `${name} - Delete this Product from the Basket`,
-      });
-      dispatch(removeFromCart({ id }));
+    handelMessage({
+      image,
+      server: 400,
+      message: `${name} - Delete this Product from the Basket`,
+    });
+    dispatch(removeFromCart({ id }));
   };
 
   return (
-    <div className="grid grid-cols-5 items-center border-b">
+    <div className="grid grid-cols-5 items-center border-b pb-10">
       {/* Left side */}
       <Image src={image} width={200} height={200} objectFit="contain" />
       {/* middel side  */}
@@ -99,29 +100,40 @@ function CheckoutProduct({
         </div>
         {/* Right side  */}
         <div className="flex flex-col gap-2 my-2 col-span-3 md:col-span-1 md:pl-3">
+          <div className="grid grid-cols-5 ">
+            <Button
+              isDisabled={false}
+              CLASS_NAME="col-span-1 bg-gray-300 active:border active:border-gray-500 border py-1 rounded text-center text-xl cursor-pointer"
+              handelClick={() => quantityupdate("decrement")}
+              TEXT={"-"}
+            />
+            <h1 className="col-span-3 text-center">{quantity}</h1>
+            <Button
+              isDisabled={false}
+              CLASS_NAME="col-span-1 bg-gray-300 active:border active:border-gray-500 border py-1 rounded text-center text-xl cursor-pointer"
+              handelClick={() => quantityupdate("increment")}
+              TEXT={"+"}
+            />
+          </div>
 
-        <div className="grid grid-cols-5 ">
-          <buttom className="col-span-1 bg-gray-300 active:border active:border-gray-500 border py-1 rounded text-center text-xl cursor-pointer" onClick={()=> quantityupdate("decrement")}>-</buttom>
-          <h1 className="col-span-3 text-center">{quantity}</h1>
-          <buttom className="col-span-1 bg-gray-300 active:border active:border-gray-500 border py-1 rounded text-center text-xl cursor-pointer" onClick={()=> quantityupdate("increment")}>+</buttom>
-        </div>
+          <Button
+            isDisabled={false}
+            product_ID={shipping ? "false" : "true"}
+            CLASS_NAME="button"
+            handelClick={() =>
+              shipping
+                ? updatetocartshopping("false")
+                : updatetocartshopping("true")
+            }
+            TEXT={shipping ? "Remove for Buy" : "Add for Buy"}
+          />
 
-          {shipping ? (
-            <button className="button" onClick={()=> updatetocartshopping("false")}>
-              Remove from Basket
-            </button>
-          ) : (
-            <button className="button" onClick={()=> updatetocartshopping("true")}>
-              Add to Basket
-            </button>
-          )}
-
-          <button
-            className="bg-red-500 hover:bg-red-400 text-white rounded text-sm p-2"
-            onClick={removefromcart}
-          >
-            Delete
-          </button>
+          <Button
+            isDisabled={false}
+            CLASS_NAME="bg-red-500 hover:bg-red-400 text-white rounded text-sm p-2"
+            handelClick={removefromcart}
+            TEXT={"Delete"}
+          />
         </div>
       </div>
     </div>

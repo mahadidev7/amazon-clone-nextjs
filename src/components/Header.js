@@ -58,7 +58,7 @@ const Header = () => {
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2 ">
         {/* logo */}
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
-          <Link href={"/"}>
+          <Link href={"./index"}>
             <Image
               src="https://links.papareact.com/f90"
               width={150}
@@ -166,10 +166,10 @@ const Header = () => {
       </div>
       {/* // bottom nav  */}
       <div className="flex items-center space-x-2 py-3 px-3 text-sm text-white bg-[#232F3E] overflow-auto">
-        {/* <p className='link flex items-center whitespace-nowrap'>
+        <p className='link flex items-center whitespace-nowrap'>
                 <AiOutlineMenu size={25}/>
                 All
-            </p> */}
+            </p>
         <Link href={"./Allproduct"}>
           <p className="link whitespace-nowrap">Prime Video</p>
         </Link>

@@ -5,14 +5,12 @@ import Currency from "react-currency-formatter";
 import CheckoutProduct from "../components/CheckoutProduct";
 import CustomModel from "../components/CustomModel";
 import Header from "../components/Header";
-import {
-  selectCarts,
-  selectProducts
-} from "../slices/basketSlice";
+import { selectCarts, selectProducts } from "../slices/basketSlice";
 import { selectServer } from "../slices/mahadiSlice";
 import { useSession } from "next-auth/react";
 import BackToTop from "../components/BackToTop";
 import Footer from "../components/Footer";
+import Button from "../components/share/Button";
 
 function Checkout() {
   const ReduxProducts = useSelector(selectProducts);
@@ -21,17 +19,23 @@ function Checkout() {
   const [ReduxBaskets, setReduxBaskets] = useState([]);
   const sliceServer = useSelector(selectServer);
   const { data: session } = useSession();
-  const ReduxTotalPrice = ReduxBaskets?.reduce((total, item)=> total + item.totalPrice, 0 )
+  const ReduxTotalPrice = ReduxBaskets?.reduce(
+    (total, item) => total + item.totalPrice,
+    0
+  );
 
   const proceedhandeler = () => {
-    // alert("123");
+    alert("Thank you for your purchase");
   };
 
   useEffect(() => {
-    setReduxCarts(ReduxProducts.filter((item) => item.cart === true))
-    setReduxBaskets(ReduxCarts.filter((item) => item.shipping === true))
-  }, [ReduxCarts, ReduxProducts]);
+    setReduxCarts(ReduxProducts.filter((item) => item.cart === true));
+  }, [ ReduxProducts]);
 
+  useEffect(() => {
+    setReduxBaskets(ReduxCarts.filter((item) => item.shipping === true));
+  }, [ReduxCarts]);
+  
   return (
     <div className="bg-gray-100">
       <Header />
@@ -52,17 +56,17 @@ function Checkout() {
             <h1 className="text-3xl border-b pb-4 font-bold">
               {ReduxCarts.length === 0
                 ? "Your Amazon Basket is empty"
-                : "Shopping Basket "}
+                : `Shopping Basket - (${ReduxCarts.length})`
+              }
             </h1>
-            {ReduxCarts.length === 0 &&
+            {ReduxCarts.length === 0 && (
               <Image
                 src={`https://i.ibb.co/cLdVCws/df.jpg`}
                 width={300}
                 height={250}
                 objectFit="contain"
               />
-   
-            }
+            )}
             {/* cart product Lists  */}
             {ReduxCarts?.map((item, i) => (
               <CheckoutProduct key={i} {...item} />
@@ -71,7 +75,7 @@ function Checkout() {
         </div>
 
         {/* Right  */}
-        <div className="shadow-md flex flex-col bg-white p-10 rounded col-span-2 md:mt-3 my-4">
+        <div className="shadow-md bg-white p-10 rounded col-span-2 md:mt-3 my-4">
           <h2 className="text-2xl border-b pb-4 text-center mb-9">
             Subtotal {ReduxBaskets.length} items
           </h2>
@@ -92,7 +96,7 @@ function Checkout() {
             );
           })}
 
-          <div className="grid grid-cols-5 font-semibold uppercase mt-5">
+          <div className="grid grid-cols-5 font-semibold uppercase my-5">
             <p className="col-span-3 text-right pr-4"> Total Price</p>
 
             <div className="col-span-2 flex gap-1">
@@ -104,16 +108,15 @@ function Checkout() {
           </div>
 
           {/* proced Button */}
-          <button
-            disabled={!session}
-            className={`button mt-10 ${
-              !session &&
-              "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
-            } `}
-            onClick={proceedhandeler}
-          >
-            {!session ? "Sign in to chechout" : "Proced to chechout"}
-          </button>
+
+          <Button
+            isDisabled={!session}
+            CLASS_NAME={
+              session ? "button py-3" : "bg-gray-300 rounded p-1 text-black cursor-not-allowed py-3"
+            }
+            handelClick={proceedhandeler}
+            TEXT={!session ? "Sign in to chechout" : "Proced to chechout"}
+          />
         </div>
       </main>
 
