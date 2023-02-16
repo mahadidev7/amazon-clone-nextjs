@@ -58,7 +58,7 @@ const Header = () => {
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2 ">
         {/* logo */}
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
-          <Link href={"./index"}>
+          <Link href={"./"}>
             <Image
               src="https://links.papareact.com/f90"
               width={150}
