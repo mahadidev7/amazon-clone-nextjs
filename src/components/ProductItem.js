@@ -90,7 +90,7 @@ function ProductItem({
           {category}
         </p>
         <Image
-          src={image || notImg}
+          src={image}
           height={200}
           width={200}
           objectFit="contain"
